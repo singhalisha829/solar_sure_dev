@@ -1,0 +1,134 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  max-width: none;
+}
+.box,
+.vendor-box {
+  /* height: 45rem; */
+  padding: 4rem 2rem;
+  width: 35%;
+
+  background: #ffffff;
+  box-shadow: 4px 8px 34px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 40px;
+  align-items: center;
+}
+
+.footer {
+  margin-right: 16%;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content {
+  margin-top: 2rem;
+  color: #6b6b6b;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login_fields {
+  width: 100%;
+  background: #e8edf8;
+  height: 2rem;
+  border-radius: 4px;
+  padding: 0rem 1rem;
+  border: #e5e5e5 solid 0.1em;
+}
+
+.login_button {
+  background: linear-gradient(180deg, #f37920 100%, #ff9e5e 100%);
+  border: none;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  border-radius: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+  width: 80%;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.login_icon {
+  position: absolute;
+  right: 1rem;
+  top: 0.6rem;
+  color: #3f5575;
+}
+
+@media (max-width: 600px) {
+  .login_fields {
+    height: 3.5rem;
+  }
+
+  .box {
+    width: 70%;
+    height: 38rem;
+  }
+
+  .vendor-box {
+    width: 70%;
+  }
+  .box img {
+    margin-left: 20%;
+  }
+
+  .footer {
+    margin-right: 5%;
+  }
+
+  .login_icon {
+    top: 0.9rem;
+  }
+
+  .login_button {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+
+  .content {
+    width: 70%;
+    font-size: 1.3rem;
+    line-height: 1.7rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .input_area {
+    margin-top: 3rem;
+  }
+}
+
+.login_button:active {
+  background: #6b6b6b;
+}

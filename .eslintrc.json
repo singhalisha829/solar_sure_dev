@@ -1,0 +1,16 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-unused-vars": "off",
+    "no-console": "error",
+    "default-case": "error",
+    "no-else-return": "off",
+    // "no-empty-function": "error",
+    "vars-on-top": "warn",
+    "prefer-promise-reject-errors": "error",
+    "no-empty": "error",
+    // "eslint-plugin-import/no-duplicates": "error",
+    "no-redeclare": "error",
+    "react-hooks/exhaustive-deps": "off"
+  }
+}

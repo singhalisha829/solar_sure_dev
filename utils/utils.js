@@ -1,0 +1,128 @@
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+//project/?id=1
+export const dummyProject = {
+  id: 13,
+  name: "Project Demo",
+  company: 7,
+  company_name: "Ornate 2",
+  project_site: 2,
+  project_site_name: "Site Name",
+  refrence_number: "12",
+  start_date: "2024-01-18",
+  deadline_date: "2024-01-20",
+  budget: "10",
+  project_head: 10,
+  project_head_name: "Amit Sharma",
+  status: "Inactive",
+  project_milestone: [],
+  bom_heads: {
+    Electrical: [
+      {
+        section_name: "Electrical",
+        id: 33,
+        name: "section 1",
+        bom_items: [
+          {
+            id: 30,
+            bom_section: 33,
+            bom_section_name: "section 1",
+            item: 4,
+            item_name: "Product 5",
+            make: 3,
+            make_name: "os#2",
+            quantity: {
+              unit: "m",
+              quantity: "2",
+            },
+            unit_price: 50.5,
+            estimated_cost_price: 101.0,
+            cost_price: 3.0,
+            selling_price: 12000.0,
+            vendor: 1,
+            vendor_name: "vendor name",
+          },
+          {
+            id: 37,
+            bom_section: 33,
+            bom_section_name: "section 1",
+            item: 4,
+            item_name: "Product 5",
+            make: 4,
+            make_name: "Make 100",
+            quantity: {
+              unit: "m",
+              quantity: "1",
+            },
+            unit_price: null,
+            estimated_cost_price: null,
+            cost_price: null,
+            selling_price: null,
+            vendor: null,
+            vendor_name: null,
+          },
+        ],
+      },
+      {
+        section_name: "Electrical",
+        id: 34,
+        name: "section 2",
+        bom_items: [
+          {
+            id: 31,
+            bom_section: 34,
+            bom_section_name: "section 2",
+            item: 1,
+            item_name: "vendor name",
+            make: 3,
+            make_name: "os#2",
+            quantity: {
+              unit: "m",
+              quantity: "12",
+            },
+            unit_price: 4.0,
+            estimated_cost_price: 48.0,
+            cost_price: null,
+            selling_price: 428.57,
+            vendor: 1,
+            vendor_name: "vendor name",
+          },
+          {
+            id: 32,
+            bom_section: 34,
+            bom_section_name: "section 2",
+            item: 2,
+            item_name: "Product 2",
+            make: 2,
+            make_name: "OS#1",
+            quantity: {
+              unit: "m",
+              quantity: "12",
+            },
+            unit_price: 10.0,
+            estimated_cost_price: 120.0,
+            cost_price: null,
+            selling_price: 1071.43,
+            vendor: 1,
+            vendor_name: "vendor name",
+          },
+        ],
+      },
+      {
+        section_name: "Electrical",
+        id: 35,
+        name: "Section 3",
+        bom_items: [],
+      },
+    ],
+    Mechanical: [],
+    Panel: [],
+    Inverter: [],
+    Installation: [],
+  },
+  project_schedule_header: [],
+};

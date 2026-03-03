@@ -1,0 +1,15 @@
+.avatarBorder{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid  #556080;
+    background-color:#E7ECED ;
+    color: #556080;
+    font-weight: 600;
+    position: relative;
+}
+.avatarBorder > img{
+    border-radius: 50%;
+}
