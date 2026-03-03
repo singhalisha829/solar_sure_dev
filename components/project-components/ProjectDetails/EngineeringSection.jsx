@@ -100,7 +100,7 @@ const Section = ({
         total =
           total +
           Number(item.bbu_unit_price || 0) *
-            Number(item.quantity_new.split(" ")[0] || 0);
+          Number(item.quantity_new.split(" ")[0] || 0);
         productList.push({
           item: item.item,
           make: item.make,
@@ -248,7 +248,7 @@ const Section = ({
                 }}
                 variant={"inverted"}
                 customText={"#F47920"}
-                className="bg-orange-400/10 text-orange-500 px-2 hover:bg-orange-600/10 "
+                className="bg-orange-400/10 text-primary px-2 hover:bg-orange-600/10 "
               >
                 <FaPlusCircle />
                 Add Item
@@ -260,7 +260,7 @@ const Section = ({
               onClick={() => openModal("panel-inverter-item" + section.id)}
               variant={"inverted"}
               customText={"#F47920"}
-              className="bg-orange-400/10 text-orange-500 px-2 hover:bg-orange-600/10 "
+              className="bg-orange-400/10 text-primary px-2 hover:bg-orange-600/10 "
             >
               Add Items
             </Button>
@@ -293,7 +293,7 @@ const Section = ({
             valueHandler={valueHandler}
             rows={bomItems}
             columns={tableHeader}
-            onRowClick={() => {}}
+            onRowClick={() => { }}
             errorRows={errorRows}
             highlightContigencyRows={true}
             handleOpenModal={(row) => {
@@ -305,7 +305,7 @@ const Section = ({
               openModal("delete-engineering-item-warning");
             }}
             projectCapacity={projectDetails.project_capacity || 1}
-            // showContigencyBubble={true}
+          // showContigencyBubble={true}
           />
         ) : (
           <ProjectItemTable
@@ -313,7 +313,7 @@ const Section = ({
             valueHandler={valueHandler}
             rows={bomItems}
             columns={tableHeader}
-            onRowClick={() => {}}
+            onRowClick={() => { }}
             errorRows={errorRows}
             showMenu={tab === "Engineering"}
             onMenuOptionClicked={handleDropSection}
@@ -336,7 +336,7 @@ const Section = ({
             }}
             // Engineering tab items can be deleted only uptil planning section is not approved
             canDelete={projectDetails.planning_section_approval !== "Approved"}
-            // showContigencyBubble={true}
+          // showContigencyBubble={true}
           />
         )}
       </div>

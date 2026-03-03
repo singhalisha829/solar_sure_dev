@@ -251,12 +251,12 @@ const ProjectDetailsPage = () => {
       <div className="flex items-center gap-4">
         <h2 className=" flex text-xl font-bold tracking-tight capitalize">
           <span
-            className="text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.push("/projects")}
           >
             Projects
           </span>
-          <MdArrowForwardIos className="text-orange-500 mt-1" />
+          <MdArrowForwardIos className="text-primary mt-1" />
           {projectName}
         </h2>
         <div className="bg-zinc-800/10 rounded-full px-2.5 py-1 text-zinc-800 text-[10px] font-bold tracking-tight">
@@ -443,7 +443,7 @@ function Tab({ icon, name, value, onClick }) {
   return (
     <button
       onClick={() => onClick(name)}
-      className="flex items-center whitespace-nowrap gap-2.5 px-4 py-2 rounded-lg bg-zinc-600/10 text-zinc-600 text-base font-medium tracking-tight cursor-pointer disabled:cursor-default disabled:bg-orange-500/10 disabled:text-orange-500"
+      className="flex items-center whitespace-nowrap gap-2.5 px-4 py-2 rounded-lg bg-zinc-600/10 text-zinc-600 text-base font-medium tracking-tight cursor-pointer disabled:cursor-default disabled:bg-orange-500/10 disabled:text-primary"
       disabled={value === name}
     >
       {icon} <p>{name}</p>

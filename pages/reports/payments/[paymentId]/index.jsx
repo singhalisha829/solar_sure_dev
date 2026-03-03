@@ -216,12 +216,12 @@ const ProjectPayments = () => {
       <div className="flex justify-between items-center gap-4">
         <h2 className=" flex text-xl font-bold tracking-tight">
           <span
-            className="text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.back()}
           >
             Ongoing Projects
           </span>
-          <MdArrowForwardIos className="mt-1 text-orange-500" />
+          <MdArrowForwardIos className="mt-1 text-primary" />
           Payments
         </h2>
 
@@ -255,11 +255,10 @@ const ProjectPayments = () => {
               onClick={() => {
                 setActiveTab(tab);
               }}
-              className={`mr-4 flex px-4 py-1  ${
-                activeTab === tab
+              className={`mr-4 flex px-4 py-1  ${activeTab === tab
                   ? "border-b-2 border-b-primary text-primary  "
                   : "border-transparent"
-              } focus:outline-none`}
+                } focus:outline-none`}
             >
               {tab}
             </button>

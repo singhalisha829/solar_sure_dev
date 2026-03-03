@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { LocalStorageService } from "@/services/LocalStorageHandler";
-import { ornateLogo } from "@/utils/images";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -215,10 +214,11 @@ const Sidebar = ({ user, accessibility }) => {
       {/* Logo */}
       <Link href={"/"} className="flex px-5 cursor-pointer justify-center">
         <Image
-          src={ornateLogo}
-          width={50}
-          placeholder="blur"
-          alt="ornate logo"
+          src="https://solarsure.in/wp-content/uploads/2025/08/cropped-Landscape_Logo-scaled-1-203x33.png"
+          width={203}
+          height={33}
+          alt="solar sure logo"
+          className="custom-logo"
         />
       </Link>
 
@@ -260,11 +260,10 @@ const Sidebar = ({ user, accessibility }) => {
                     </span>
                   ) : (
                     <Link
-                      className={`relative ml-4 flex cursor-pointer items-center gap-3 ${
-                        menuItem.path === currentUrl
-                          ? "font-bold text-primary"
-                          : ""
-                      }`}
+                      className={`relative ml-4 flex cursor-pointer items-center gap-3 ${menuItem.path === currentUrl
+                        ? "font-bold text-primary"
+                        : ""
+                        }`}
                       href={menuItem.path}
                     >
                       {menuItem.icon}
@@ -296,11 +295,10 @@ const Sidebar = ({ user, accessibility }) => {
                         <li key={subMenuItem.name}>
                           <div className="p-3 pl-0 hover:bg-gunmetal">
                             <Link
-                              className={`relative ml-4 flex cursor-pointer items-center gap-3 ${
-                                subMenuItem.path === currentUrl
-                                  ? "font-bold text-primary"
-                                  : ""
-                              }`}
+                              className={`relative ml-4 flex cursor-pointer items-center gap-3 ${subMenuItem.path === currentUrl
+                                ? "font-bold text-primary"
+                                : ""
+                                }`}
                               href={subMenuItem.path}
                             >
                               {subMenuItem.icon}

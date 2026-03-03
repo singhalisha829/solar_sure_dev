@@ -306,12 +306,12 @@ const CreateOrder = () => {
       <div className="flex justify-between items-center gap-4">
         <h2 className=" flex text-xl font-bold tracking-tight">
           <span
-            className="text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.back()}
           >
             Create Purchase Order
           </span>{" "}
-          <MdArrowForwardIos className="mt-1 text-orange-500" />
+          <MdArrowForwardIos className="mt-1 text-primary" />
           {projectDetails?.project_name}
         </h2>
 

@@ -44,22 +44,22 @@ const PlanningSection = ({ section, selectedCatagory }) => {
     // Conditionally add the "Avg Price" column
     ...(displayAvgPrice
       ? [
-          {
-            name: "PO Count",
-            key: "item_count",
-            displayType: "price",
-            width: "7rem",
+        {
+          name: "PO Count",
+          key: "item_count",
+          displayType: "price",
+          width: "7rem",
+        },
+        {
+          name: "Avg. Unit Price",
+          key: "average_unit_price",
+          type: "po_avg_unit_price",
+          width: "9rem",
+          onClick: (row) => {
+            fetchItemPoList(row.item);
           },
-          {
-            name: "Avg. Unit Price",
-            key: "average_unit_price",
-            type: "po_avg_unit_price",
-            width: "9rem",
-            onClick: (row) => {
-              fetchItemPoList(row.item);
-            },
-          },
-        ]
+        },
+      ]
       : []),
     {
       name: "BBU Unit Price(₹)",
@@ -239,7 +239,7 @@ const PlanningSection = ({ section, selectedCatagory }) => {
                     onClick={() => fetchAvgUnitPrice(section.id)}
                     variant={"inverted"}
                     customText={"#F47920"}
-                    className="bg-orange-400/10 text-orange-500 px-2 hover:bg-orange-600/10 "
+                    className="bg-orange-400/10 text-primary px-2 hover:bg-orange-600/10 "
                   >
                     <FaPen />
                     Edit Items
@@ -258,7 +258,7 @@ const PlanningSection = ({ section, selectedCatagory }) => {
           valueHandler={valueHandler}
           rows={bomItems}
           columns={tableHeader}
-          onRowClick={() => {}}
+          onRowClick={() => { }}
           highlightContigencyRows={true}
           projectCapacity={projectDetails.project_capacity || 1}
         />

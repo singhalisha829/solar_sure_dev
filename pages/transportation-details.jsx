@@ -518,7 +518,7 @@ const TransporterDetails = () => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center gap-4">
-        <h2 className="text-orange-500 text-xl font-bold tracking-tight">
+        <h2 className="text-primary text-xl font-bold tracking-tight">
           Dispatch Details
         </h2>
         <div className="flex items-center gap-2">

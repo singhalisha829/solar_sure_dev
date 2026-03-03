@@ -340,12 +340,12 @@ const EditSiteVisit = () => {
       <div className="flex flex-col w-full gap-4">
         <h2 className="flex text-xl font-bold tracking-tight">
           <span
-            className="flex text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="flex text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.back()}
           >
             Site Visits
           </span>
-          <MdArrowForwardIos className="mt-1 text-orange-500" />
+          <MdArrowForwardIos className="mt-1 text-primary" />
           Edit Site Visit
         </h2>
         <div className="min-h-[85vh] bg-white relative grid grid-cols-2 gap-x-2.5 gap-y-5 overflow-hidden p-5">

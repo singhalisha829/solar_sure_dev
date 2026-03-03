@@ -183,12 +183,12 @@ const ProjectContingencyPage = () => {
       <div className="flex justify-between items-center gap-4">
         <h2 className=" flex text-xl font-bold tracking-tight">
           <span
-            className="text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.back()}
           >
             {projectName}
           </span>{" "}
-          <MdArrowForwardIos className="text-orange-500 mt-1" />
+          <MdArrowForwardIos className="text-primary mt-1" />
           Add Contingency Items
         </h2>
 

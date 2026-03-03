@@ -37,16 +37,16 @@ const Manufacturers = () => {
     // Conditionally add the "Actions" column
     ...(accessibilityInfo?.edit_view
       ? [
-          {
-            name: "Actions",
-            type: "actions-column",
-            actionType: "edit",
-            onClickEdit: (row) => {
-              setSelectedRow(row);
-              openModal("add-edit-project-completion-document");
-            },
+        {
+          name: "Actions",
+          type: "actions-column",
+          actionType: "edit",
+          onClickEdit: (row) => {
+            setSelectedRow(row);
+            openModal("add-edit-project-completion-document");
           },
-        ]
+        },
+      ]
       : []),
   ];
 
@@ -64,7 +64,7 @@ const Manufacturers = () => {
   return (
     <>
       <div className="flex justify-between items-center gap-4">
-        <h2 className="text-orange-500 text-xl font-bold tracking-tight">
+        <h2 className="text-primary text-xl font-bold tracking-tight">
           Project Completions
         </h2>
 

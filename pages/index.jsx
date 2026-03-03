@@ -333,7 +333,7 @@ function Home() {
             <div className="grid grid-cols-2 gap-2">
               <Button
                 variant={"inverted"}
-                customText={"text-orange-500"}
+                customText={"text-primary"}
                 onClick={() => {
                   setFilters({
                     status: "",

@@ -225,7 +225,7 @@ const Products = () => {
   return (
     <>
       <div className="flex justify-between items-center gap-4">
-        <h2 className="text-orange-500 text-xl font-bold tracking-tight">
+        <h2 className="text-primary text-xl font-bold tracking-tight">
           Products
         </h2>
 

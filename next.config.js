@@ -22,7 +22,7 @@ const nextConfig = {
     SERVER: process.env.SERVER,
   },
   images: {
-    domains: [host],
+    domains: [host, "solarsure.in"],
   },
   output: "standalone",
 };

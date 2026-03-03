@@ -486,12 +486,12 @@ const EditPurchaseOrder = () => {
       <div className="flex justify-between items-center gap-4">
         <h2 className=" flex text-xl font-bold tracking-tight">
           <span
-            className="text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.back()}
           >
             Back
           </span>{" "}
-          <MdArrowForwardIos className="mt-1 text-orange-500" />
+          <MdArrowForwardIos className="mt-1 text-primary" />
           Edit Purchase Order
         </h2>
       </div>
@@ -612,7 +612,7 @@ const EditPurchaseOrder = () => {
                   onClick={() => openModal("add-purchase-order-extra-charge")}
                   variant={"inverted"}
                   customText={"#F47920"}
-                  className="bg-orange-400/10 self-end text-orange-500 px-2 hover:bg-orange-600/10 "
+                  className="bg-orange-400/10 self-end text-primary px-2 hover:bg-orange-600/10 "
                 >
                   <FaPlusCircle />
                   Add Extra Charge
@@ -631,7 +631,7 @@ const EditPurchaseOrder = () => {
               onClick={() => openModal("add-purchase-order-extra-charge")}
               variant={"inverted"}
               customText={"#F47920"}
-              className="bg-orange-400/10 w-[10rem] text-orange-500 px-2 hover:bg-orange-600/10 "
+              className="bg-orange-400/10 w-[10rem] text-primary px-2 hover:bg-orange-600/10 "
             >
               <FaPlusCircle />
               Add Extra Charges
@@ -646,7 +646,7 @@ const EditPurchaseOrder = () => {
                     onClick={fetchInstallationBudgetItems}
                     variant={"inverted"}
                     customText={"#F47920"}
-                    className="bg-orange-400/10 self-end text-orange-500 px-2 hover:bg-orange-600/10 "
+                    className="bg-orange-400/10 self-end text-primary px-2 hover:bg-orange-600/10 "
                   >
                     <FaPlusCircle />
                     Add Installation Budget
@@ -655,7 +655,7 @@ const EditPurchaseOrder = () => {
                     onClick={fetchUnbookedPoItems}
                     variant={"inverted"}
                     customText={"#F47920"}
-                    className="bg-orange-400/10 self-end text-orange-500 px-2 hover:bg-orange-600/10 "
+                    className="bg-orange-400/10 self-end text-primary px-2 hover:bg-orange-600/10 "
                   >
                     <FaPlusCircle />
                     Add Item
@@ -667,7 +667,7 @@ const EditPurchaseOrder = () => {
                     onClick={() => openModal("add-purchase-order-item")}
                     variant={"inverted"}
                     customText={"#F47920"}
-                    className="bg-orange-400/10 self-end text-orange-500 px-2 hover:bg-orange-600/10 "
+                    className="bg-orange-400/10 self-end text-primary px-2 hover:bg-orange-600/10 "
                   >
                     <FaPlusCircle />
                     Add Item

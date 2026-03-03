@@ -64,7 +64,7 @@ const FileInput = ({ id, name }) => {
       // Handle error, e.g., display an error message
     }
   };
-  
+
   return (
     <div className="">
       <button
@@ -91,7 +91,7 @@ const FileInput = ({ id, name }) => {
             </div>
             <div className="flex flex-col gap-1 text-center">
               <p className=" text-neutral-700 text-sm font-medium">
-                <span className="text-orange-500">Click to Upload</span> or drag
+                <span className="text-primary">Click to Upload</span> or drag
                 and drop
               </p>
               <p className="text-neutral-700 text-xs font-normal">
@@ -126,7 +126,7 @@ const FileInput = ({ id, name }) => {
                 </p>
               )}
               {uploadProgress === 100 && !uploadError && (
-                <p className="text-orange-500 text-sm font-semibold leading-tight">
+                <p className="text-primary text-sm font-semibold leading-tight">
                   Click to view
                 </p>
               )}

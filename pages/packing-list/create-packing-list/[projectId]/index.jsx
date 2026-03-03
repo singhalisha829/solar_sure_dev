@@ -335,12 +335,12 @@ const CreatePackingList = () => {
       <div className="flex justify-between items-center gap-4">
         <h2 className=" flex text-xl font-bold tracking-tight">
           <span
-            className="text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.back()}
           >
             {breadcrumbsText}
           </span>
-          <MdArrowForwardIos className="mt-1 text-orange-500" />
+          <MdArrowForwardIos className="mt-1 text-primary" />
           Create Packing List
         </h2>
       </div>
@@ -388,53 +388,53 @@ const CreatePackingList = () => {
       {(uploadErrorItem?.invalid_product.length > 0 ||
         uploadErrorItem?.bom_quantity_error.length > 0 ||
         uploadErrorItem?.inventory_quantitiy_error.length > 0) && (
-        <div className="border-1 relative text-red-500 border-red-500 rounded p-2 bg-red-50">
-          <FaTimes
-            className="absolute right-2 top-2 cursor-pointer"
-            onClick={() => setUploadErrorItems(null)}
-          />
-          {uploadErrorItem?.invalid_product.length > 0 && (
-            <>
-              <span>
-                BOM Item(s) -{" "}
-                <strong>
-                  {uploadErrorItem.invalid_product
-                    .map((item) => item.product_code)
-                    .join(", ")}
-                </strong>{" "}
-                is not present in the provided Item list.
-              </span>
-              <br />
-            </>
-          )}
-          {uploadErrorItem?.bom_quantity_error.length > 0 && (
-            <>
+          <div className="border-1 relative text-red-500 border-red-500 rounded p-2 bg-red-50">
+            <FaTimes
+              className="absolute right-2 top-2 cursor-pointer"
+              onClick={() => setUploadErrorItems(null)}
+            />
+            {uploadErrorItem?.invalid_product.length > 0 && (
+              <>
+                <span>
+                  BOM Item(s) -{" "}
+                  <strong>
+                    {uploadErrorItem.invalid_product
+                      .map((item) => item.product_code)
+                      .join(", ")}
+                  </strong>{" "}
+                  is not present in the provided Item list.
+                </span>
+                <br />
+              </>
+            )}
+            {uploadErrorItem?.bom_quantity_error.length > 0 && (
+              <>
+                <span>
+                  The quantity provided for the BOM item(s) -{" "}
+                  <strong>
+                    {uploadErrorItem.bom_quantity_error
+                      .map((item) => item.product_code)
+                      .join(", ")}
+                  </strong>{" "}
+                  exceeds the required quantity.
+                </span>
+                <br />
+              </>
+            )}
+
+            {uploadErrorItem?.inventory_quantitiy_error.length > 0 && (
               <span>
                 The quantity provided for the BOM item(s) -{" "}
                 <strong>
-                  {uploadErrorItem.bom_quantity_error
+                  {uploadErrorItem.inventory_quantitiy_error
                     .map((item) => item.product_code)
                     .join(", ")}
                 </strong>{" "}
-                exceeds the required quantity.
+                exceeds the quantity left in inventory.
               </span>
-              <br />
-            </>
-          )}
-
-          {uploadErrorItem?.inventory_quantitiy_error.length > 0 && (
-            <span>
-              The quantity provided for the BOM item(s) -{" "}
-              <strong>
-                {uploadErrorItem.inventory_quantitiy_error
-                  .map((item) => item.product_code)
-                  .join(", ")}
-              </strong>{" "}
-              exceeds the quantity left in inventory.
-            </span>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
       <div className=" bg-white rounded  overflow-scroll p-5">
         <div className="relative flex flex-col gap-4 p-5 border border-zinc-100  overflow-scroll rounded-md grow h-full">
           <div className=" gap-4 items-end flex justify-between">

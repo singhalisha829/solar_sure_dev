@@ -136,23 +136,23 @@ const ContingencyList = () => {
     },
     ...(accessibilityInfo?.edit_view || accessibilityInfo?.delete_view
       ? [
-          {
-            name: "Actions",
-            type: "contingency-actions-column",
-            actionType: allowedActions,
-            width: "5rem",
-            onClickEdit: (row) => {
-              router.push(
-                `/projects/editProjectContingency/${row.project}?projectName=${row.project_name}&id=${row.id}`
-              );
-            },
-            onClickDelete: (row) => {
-              setSelectedContingency(row);
-              openModal("delete-project-contignecy");
-            },
-            onClickDownload: (row) => downloadContingencyDoc(row),
+        {
+          name: "Actions",
+          type: "contingency-actions-column",
+          actionType: allowedActions,
+          width: "5rem",
+          onClickEdit: (row) => {
+            router.push(
+              `/projects/editProjectContingency/${row.project}?projectName=${row.project_name}&id=${row.id}`
+            );
           },
-        ]
+          onClickDelete: (row) => {
+            setSelectedContingency(row);
+            openModal("delete-project-contignecy");
+          },
+          onClickDownload: (row) => downloadContingencyDoc(row),
+        },
+      ]
       : []),
   ];
 
@@ -354,7 +354,7 @@ const ContingencyList = () => {
   return (
     <>
       <div className="flex justify-between items-center gap-4">
-        <h2 className="text-orange-500 text-xl font-bold tracking-tight">
+        <h2 className="text-primary text-xl font-bold tracking-tight">
           Contingency List
         </h2>
         <div className="flex items-center gap-4">

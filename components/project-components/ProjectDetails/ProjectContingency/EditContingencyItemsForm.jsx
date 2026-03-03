@@ -653,7 +653,7 @@ const ContingencyItemsForm = ({
             onClick={() => openModal("add-contingency-item")}
             variant={"inverted"}
             customText={"#F47920"}
-            className="bg-orange-400/10 mb-2 mr-2 w-[7rem] self-end text-orange-500 px-2 hover:bg-orange-600/10"
+            className="bg-orange-400/10 mb-2 mr-2 w-[7rem] self-end text-primary px-2 hover:bg-orange-600/10"
           >
             <FaPlusCircle />
             Add Item
@@ -663,7 +663,7 @@ const ContingencyItemsForm = ({
               onClick={() => openModal("replace-contingency-item")}
               variant={"inverted"}
               customText={"#F47920"}
-              className="bg-orange-400/10 mb-2 self-end text-orange-500 px-2 hover:bg-orange-600/10"
+              className="bg-orange-400/10 mb-2 self-end text-primary px-2 hover:bg-orange-600/10"
             >
               Replacement
             </Button>

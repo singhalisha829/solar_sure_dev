@@ -78,13 +78,13 @@ const ProjectInstallationFreight = ({
     // Conditionally add the "Per Watt" column
     ...(tab === "Planning"
       ? [
-          {
-            name: "Per Watt",
-            key: "perWatt",
-            displayType: "price",
-            minWidth: "20%",
-          },
-        ]
+        {
+          name: "Per Watt",
+          key: "perWatt",
+          displayType: "price",
+          minWidth: "20%",
+        },
+      ]
       : []),
     {
       name: "Amount(₹)",
@@ -139,7 +139,7 @@ const ProjectInstallationFreight = ({
           onClick={() => openModal("add-installation-item")}
           variant={"inverted"}
           customText={"#F47920"}
-          className="bg-orange-400/10 w-[7rem] self-end text-orange-500 px-2 hover:bg-orange-600/10 "
+          className="bg-orange-400/10 w-[7rem] self-end text-primary px-2 hover:bg-orange-600/10 "
         >
           <FaPlusCircle />
           Add Item

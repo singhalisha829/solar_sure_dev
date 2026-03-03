@@ -25,14 +25,14 @@ const CustomTimeline = ({ tasks }) => {
                 task?.planned_start_date,
                 task?.planned_end_date
               ) === "In Progress" &&
-                "bg-gradient-to-b from-zinc-400 to-gray-200"
+              "bg-gradient-to-b from-zinc-400 to-gray-200"
             )}
           ></div>
           <div className="flex items-center gap-5 grow pr-5 shrink-0">
             <p className="text-slate-700 text-xs font-bold leading-[10px] w-60">
               {task.task_name}
               {task?.header_name && (
-                <span className="text-orange-500">({task?.header_name})</span>
+                <span className="text-primary">({task?.header_name})</span>
               )}
             </p>
             <div className=" custom-class border border-zinc-300 rounded-md h-11 flex justify-between items-center py-3 px-4 grow bg-white shadow shadow-zinc-300">

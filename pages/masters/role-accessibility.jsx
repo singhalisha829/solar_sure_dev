@@ -27,7 +27,7 @@ const RoleAccessibility = () => {
   return (
     <>
       <div className="flex justify-between items-center gap-4">
-        <h2 className="text-orange-500 text-xl font-bold tracking-tight">
+        <h2 className="text-primary text-xl font-bold tracking-tight">
           Role Accessibility
         </h2>
 
@@ -54,7 +54,7 @@ const RoleAccessibility = () => {
                             type="checkbox"
                             className="w-fit"
                             checked={false}
-                            onChange={() => {}}
+                            onChange={() => { }}
                           />{" "}
                         </div>
                       );

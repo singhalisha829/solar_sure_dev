@@ -324,12 +324,12 @@ const PreviewProject = () => {
       <div className="mt-1 mb-4 flex justify-between cursor-pointer relative gap-2 border-0 text-xl">
         <h1 className="print:mx-auto flex">
           <span
-            className="flex text-orange-500 hover:underline underline-offset-4 print:hidden cursor-pointer"
+            className="flex text-primary hover:underline underline-offset-4 print:hidden cursor-pointer"
             onClick={() => router.push("/project-registration")}
           >
             Project Registration
           </span>
-          <MdArrowForwardIos className="mt-1 print:hidden text-orange-500" />
+          <MdArrowForwardIos className="mt-1 print:hidden text-primary" />
           Generate Project
         </h1>
 

@@ -136,7 +136,7 @@ const SiteVisits = () => {
     <>
       <div className="flex justify-between items-center gap-4">
         <div className="flex items-center gap-5">
-          <h2 className="text-orange-500 text-xl font-bold tracking-tight">
+          <h2 className="text-primary text-xl font-bold tracking-tight">
             Site Visits
           </h2>
           <div className="overflow-hidden rounded-md border-1">

@@ -815,7 +815,7 @@ const Workplace = () => {
                         <div className="flex items-center gap-2">
                           Task Name
                           {sortConfig.key === 'task_name' && (
-                            <span className="text-orange-500">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                            <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
                           )}
                         </div>
                       </th>
@@ -823,7 +823,7 @@ const Workplace = () => {
                         <div className="flex items-center gap-2">
                           Project
                           {sortConfig.key === 'project_name' && (
-                            <span className="text-orange-500">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                            <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
                           )}
                         </div>
                       </th>
@@ -831,7 +831,7 @@ const Workplace = () => {
                         <div className="flex items-center gap-2">
                           Status
                           {sortConfig.key === 'status' && (
-                            <span className="text-orange-500">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                            <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
                           )}
                         </div>
                       </th>
@@ -839,7 +839,7 @@ const Workplace = () => {
                         <div className="flex items-center gap-2">
                           Priority
                           {sortConfig.key === 'priority' && (
-                            <span className="text-orange-500">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                            <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
                           )}
                         </div>
                       </th>
@@ -847,7 +847,7 @@ const Workplace = () => {
                         <div className="flex items-center gap-2">
                           Start Date
                           {sortConfig.key === 'start_date' && (
-                            <span className="text-orange-500">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                            <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
                           )}
                         </div>
                       </th>
@@ -855,7 +855,7 @@ const Workplace = () => {
                         <div className="flex items-center gap-2">
                           End Date
                           {sortConfig.key === 'end_date' && (
-                            <span className="text-orange-500">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                            <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
                           )}
                         </div>
                       </th>

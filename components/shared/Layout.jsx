@@ -67,10 +67,11 @@ function Layout({ children }) {
                             </SheetContent>
                           </Sheet>
                           <Image
-                            src={ornateLogo}
-                            width={30}
-                            alt="ornate logo"
-                            className="md:hidden"
+                            src="https://solarsure.in/wp-content/uploads/2025/08/cropped-Landscape_Logo-scaled-1-203x33.png"
+                            width={203}
+                            height={33}
+                            alt="solar sure logo"
+                            className="custom-logo"
                           />
                         </div>
                         {/* <Header /> */}

@@ -198,20 +198,20 @@ const EditLedger = () => {
       product_details:
         editedData.product_details?.length > 0
           ? editedData.product_details.map((product) => {
-              let product_detail = {
-                product: product.product,
-                quantity: product.quantity,
-                unit: product.unit,
-                transaction_type: "CREDIT",
+            let product_detail = {
+              product: product.product,
+              quantity: product.quantity,
+              unit: product.unit,
+              transaction_type: "CREDIT",
+            };
+            if (product.unit_price !== "") {
+              product_detail = {
+                ...product_detail,
+                unit_price: product.unit_price,
               };
-              if (product.unit_price !== "") {
-                product_detail = {
-                  ...product_detail,
-                  unit_price: product.unit_price,
-                };
-              }
-              return product_detail;
-            })
+            }
+            return product_detail;
+          })
           : [],
     };
 
@@ -376,12 +376,12 @@ const EditLedger = () => {
       <div className="flex justify-between items-center gap-4">
         <h2 className="flex text-xl font-bold tracking-tight">
           <span
-            className="flex text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="flex text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.push("/inventory/ledger/")}
           >
             Ledger
           </span>
-          <MdArrowForwardIos className="mt-1 text-orange-500" />
+          <MdArrowForwardIos className="mt-1 text-primary" />
           Edit Ledger Details
         </h2>
         {formData?.ledger_items?.length === 0 &&
@@ -520,7 +520,7 @@ const EditLedger = () => {
                 onClick={() => openModal("add-stock-in-product")}
                 variant={"inverted"}
                 customText={"#F47920"}
-                className="bg-orange-400/10 text-orange-500 px-2 hover:bg-orange-600/10 "
+                className="bg-orange-400/10 text-primary px-2 hover:bg-orange-600/10 "
               >
                 <FaPlusCircle />
                 Stock In Product

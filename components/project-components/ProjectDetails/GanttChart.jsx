@@ -58,11 +58,10 @@ const GanttChart = ({ formattedTasks, setSelectedTask }) => {
           <button
             disabled={viewType.name === type.name}
             key={type.name}
-            className={`px-2 py-1.5 border bg-neutral-500/10 text-neutral-800 border-neutral-800 disabled:border-orange-500 rounded disabled:bg-orange-500/10 disabled:text-orange-500 ${
-              viewType.name === type.name
-                ? "bg-orange-500/10 border-orange-500 text-orange-500"
+            className={`px-2 py-1.5 border bg-neutral-500/10 text-neutral-800 border-neutral-800 disabled:border-orange-500 rounded disabled:bg-orange-500/10 disabled:text-primary ${viewType.name === type.name
+                ? "bg-orange-500/10 border-orange-500 text-primary"
                 : ""
-            }`}
+              }`}
             onClick={() => setViewType(type)}
           >
             {type.name}

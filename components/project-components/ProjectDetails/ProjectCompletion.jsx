@@ -239,7 +239,7 @@ const ProjectCompletion = () => {
               onClick={() => setIsEditMode(true)}
               variant={"inverted"}
               customText={"#F47920"}
-              className="bg-orange-400/10 text-orange-500 px-2 hover:bg-orange-600/10 "
+              className="bg-orange-400/10 text-primary px-2 hover:bg-orange-600/10 "
             >
               <FaPen />
               Edit Items

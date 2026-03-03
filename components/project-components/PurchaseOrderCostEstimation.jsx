@@ -30,16 +30,16 @@ const PurchaseOrderCostEstimation = ({
   const [extraCharges, setExtraCharges] = useState(
     extraPoCharges.length == 0
       ? [
-          {
-            charges: "",
-            amount: "",
-            tax_rate: "",
-            tax_amount: "",
-            total_amount: "",
-            description: "",
-            charges_name: "",
-          },
-        ]
+        {
+          charges: "",
+          amount: "",
+          tax_rate: "",
+          tax_amount: "",
+          total_amount: "",
+          description: "",
+          charges_name: "",
+        },
+      ]
       : extraPoCharges
   );
   const [extraChargesList, setExtraChargesList] = useState([]);
@@ -203,7 +203,7 @@ const PurchaseOrderCostEstimation = ({
           onClick={onAddNewRow}
           variant={"inverted"}
           customText={"#F47920"}
-          className="bg-orange-400/10 text-orange-500 px-2 hover:bg-orange-600/10 "
+          className="bg-orange-400/10 text-primary px-2 hover:bg-orange-600/10 "
         >
           <FaPlusCircle />
           Add Extra Charge

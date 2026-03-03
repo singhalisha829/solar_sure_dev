@@ -174,12 +174,12 @@ const EditPackingList = () => {
       <div className="flex justify-between items-center gap-4">
         <h2 className=" flex text-xl font-bold tracking-tight">
           <span
-            className="text-orange-500 hover:underline underline-offset-4 cursor-pointer"
+            className="text-primary hover:underline underline-offset-4 cursor-pointer"
             onClick={() => router.back()}
           >
             Back
           </span>{" "}
-          <MdArrowForwardIos className="mt-1 text-orange-500" />
+          <MdArrowForwardIos className="mt-1 text-primary" />
           Edit Packing List
         </h2>
       </div>
@@ -273,16 +273,16 @@ const EditPackingList = () => {
             {unpackedItems.some(
               (item) => item.bom_sections && item.bom_sections.length > 0
             ) && (
-              <Button
-                onClick={() => openModal("add-packing-list-item")}
-                variant={"inverted"}
-                customText={"#F47920"}
-                className="bg-orange-400/10 self-end text-orange-500 px-2 hover:bg-orange-600/10 "
-              >
-                <FaPlusCircle />
-                Add Item
-              </Button>
-            )}
+                <Button
+                  onClick={() => openModal("add-packing-list-item")}
+                  variant={"inverted"}
+                  customText={"#F47920"}
+                  className="bg-orange-400/10 self-end text-primary px-2 hover:bg-orange-600/10 "
+                >
+                  <FaPlusCircle />
+                  Add Item
+                </Button>
+              )}
             {packingListDetails && (
               <Table
                 columns={tableHeader}

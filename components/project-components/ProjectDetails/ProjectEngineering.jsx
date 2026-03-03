@@ -648,7 +648,7 @@ const ProjectEngineering = ({
                     variant={"inverted"}
                     disabled={!selectedSection || selectedSection === ""}
                     customText={"#F47920"}
-                    className="bg-orange-400/10 text-orange-500 px-2 hover:bg-orange-600/10 "
+                    className="bg-orange-400/10 text-primary px-2 hover:bg-orange-600/10 "
                   >
                     <FaPlusCircle />
                     Add Item

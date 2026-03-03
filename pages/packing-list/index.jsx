@@ -70,15 +70,15 @@ const PackingList = () => {
   const filterList = [
     ...(companyAccessibility
       ? [
-          {
-            name: "Company Type",
-            type: "dropdown",
-            options: companyTypeList,
-            optionName: "name",
-            optionId: "value",
-            key: "company_type",
-          },
-        ]
+        {
+          name: "Company Type",
+          type: "dropdown",
+          options: companyTypeList,
+          optionName: "name",
+          optionId: "value",
+          key: "company_type",
+        },
+      ]
       : []),
     {
       name: "Vendor",
@@ -99,14 +99,14 @@ const PackingList = () => {
   const tableHeader = [
     ...(companyAccessibility
       ? [
-          {
-            name: "Company Type",
-            key: "is_ornate_project",
-            type: "company_type",
-            width: "10rem",
-            sortable: true,
-          },
-        ]
+        {
+          name: "Company Type",
+          key: "is_ornate_project",
+          type: "company_type",
+          width: "10rem",
+          sortable: true,
+        },
+      ]
       : []),
     {
       name: "Company Name",
@@ -421,7 +421,7 @@ const PackingList = () => {
   return (
     <>
       <div className="flex justify-between items-center gap-4">
-        <h2 className="text-orange-500 text-xl font-bold tracking-tight">
+        <h2 className="text-primary text-xl font-bold tracking-tight">
           Packing List
         </h2>
 
