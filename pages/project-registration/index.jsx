@@ -42,7 +42,6 @@ const ProjectRegistration = () => {
     start_date: "",
     end_date: "",
     status: "",
-    company_type: "",
     search: "",
   });
 
@@ -330,7 +329,6 @@ const ProjectRegistration = () => {
       start_date: "",
       end_date: "",
       status: "",
-      company_type: "",
       search: "",
     });
     setSortConfig({

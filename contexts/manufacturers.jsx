@@ -32,27 +32,35 @@ export function ManufacturerProvider({ children }) {
     );
   };
 
-  const createManufacturerHandler = async (data) => {
+  const createManufacturerHandler = async (data, onSuccess) => {
     await requestHandler(
       async () => await createManufacturer(data),
       null,
       async (data) => {
         closeModal("add-manufacturer");
-        getManufaturerHandler();
         toast.success("Manufacturer Added Successfully!");
+        if (onSuccess) {
+          await onSuccess();
+        } else {
+          getManufaturerHandler();
+        }
       },
       toast.error
     );
   };
 
-  const editManufacturerHandler = async (id, data, modalId) => {
+  const editManufacturerHandler = async (id, data, modalId, onSuccess) => {
     await requestHandler(
       async () => await editManufacturer(id, data),
       null,
       async (data) => {
         closeModal(modalId);
-        getManufaturerHandler();
         toast.success("Manufacturer Saved Successfully");
+        if (onSuccess) {
+          await onSuccess();
+        } else {
+          getManufaturerHandler();
+        }
       },
       toast.error
     );

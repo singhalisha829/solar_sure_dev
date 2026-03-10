@@ -5,7 +5,7 @@ import { useManufacturers } from "@/contexts/manufacturers";
 import { checkSpecificKeys } from "@/utils/formValidationHandler";
 import { toast } from "sonner";
 
-const AddEditManufaturer = ({ modalId, itemDetails }) => {
+const AddEditManufaturer = ({ modalId, itemDetails, onSuccess }) => {
   const [name, setName] = useState("");
   const { createManufacturerHandler, editManufacturerHandler } =
     useManufacturers();
@@ -27,10 +27,10 @@ const AddEditManufaturer = ({ modalId, itemDetails }) => {
       return;
     }
     if (modalId.split("-")[0] === "add") {
-      await createManufacturerHandler({ name });
+      await createManufacturerHandler({ name }, onSuccess);
       clearForm();
     } else {
-      await editManufacturerHandler(itemDetails.id, { name }, modalId);
+      await editManufacturerHandler(itemDetails.id, { name }, modalId, onSuccess);
     }
   };
 

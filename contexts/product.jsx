@@ -36,14 +36,18 @@ export function ProductProvider({ children }) {
     );
   };
 
-  const createProductHandler = async (data) => {
+  const createProductHandler = async (data, onSuccess) => {
     await requestHandler(
       async () => await createProduct(data),
       null,
       async (data) => {
         closeModal("add-product");
         toast.success("Product Added Successfully!");
-        getProductHandler();
+        if (onSuccess) {
+          await onSuccess();
+        } else {
+          getProductHandler();
+        }
       },
       toast.error
     );
@@ -57,14 +61,18 @@ export function ProductProvider({ children }) {
     );
   };
 
-  const editProductHandler = async (id, data, modalId) => {
+  const editProductHandler = async (id, data, modalId, onSuccess) => {
     await requestHandler(
       async () => await editProduct(id, data),
       null,
       async (data) => {
         closeModal(modalId);
         toast.success("Product Saved Successfully!");
-        getProductHandler();
+        if (onSuccess) {
+          await onSuccess();
+        } else {
+          getProductHandler();
+        }
       },
       toast.error
     );

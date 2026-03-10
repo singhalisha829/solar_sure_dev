@@ -83,6 +83,7 @@ const Manufacturers = () => {
               rows={manufacturers}
               isEditMode={accessibilityInfo?.edit_view}
               isModalOpenOnEdit={"edit-manufacturer"}
+              onEditSuccess={getManufacturersHandler}
             />
           </div>
           <div className="relative">
@@ -100,7 +101,7 @@ const Manufacturers = () => {
         </div>
       )}
       {isLoading && <Loading />}
-      <AddEditManufacturer modalId={"add-manufacturer"} />
+      <AddEditManufacturer modalId={"add-manufacturer"} onSuccess={getManufacturersHandler} />
     </>
   );
 };

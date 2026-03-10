@@ -137,12 +137,12 @@ const BOMTemplates = () => {
       <BOMDetails modalId={"bom-template-details"} bomDetails={selectedRow} />
       <AddBomTemplate
         modalId={"add-bom-template"}
-        onSuccessfullSubmit={getBOMTemplates}
+        onSuccessfullSubmit={getBOMTemplatesHandler}
       />
       <AddBomTemplate
         modalId={"edit-bom-template"}
         itemDetails={selectedRow}
-        onSuccessfullSubmit={getBOMTemplates}
+        onSuccessfullSubmit={getBOMTemplatesHandler}
       />
     </>
   );

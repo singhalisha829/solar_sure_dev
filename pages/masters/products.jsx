@@ -302,9 +302,9 @@ const Products = () => {
         </div>
       )}
       {isLoading && <Loading />}
-      <AddProduct modalId={"add-product"} />
+      <AddProduct modalId={"add-product"} onSuccess={fetchProductHandler} />
       {selectedRow && (
-        <AddProduct modalId={"edit-product"} itemDetails={selectedRow} />
+        <AddProduct modalId={"edit-product"} itemDetails={selectedRow} onSuccess={fetchProductHandler} />
       )}
       <MergeProducts
         modalId={"merge-products-modal"}

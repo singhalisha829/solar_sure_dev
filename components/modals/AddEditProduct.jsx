@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { FaEye } from "react-icons/fa";
 import { checkSpecificKeys } from "@/utils/formValidationHandler";
 
-const AddEditProduct = ({ modalId, itemDetails }) => {
+const AddEditProduct = ({ modalId, itemDetails, onSuccess }) => {
   const { units, createProductHandler, productTypes, editProductHandler } =
     useProduct();
   const { manufacturers } = useManufacturers();
@@ -80,9 +80,9 @@ const AddEditProduct = ({ modalId, itemDetails }) => {
     }
 
     if (modalId.split("-")[0] === "add") {
-      await createProductHandler(product);
+      await createProductHandler(product, onSuccess);
     } else {
-      await editProductHandler(itemDetails.id, updatedData, modalId);
+      await editProductHandler(itemDetails.id, updatedData, modalId, onSuccess);
     }
   };
 

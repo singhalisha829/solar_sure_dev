@@ -341,6 +341,7 @@ const EditableTable = ({
         <EditManufacturerModal
           modalId={currentModalId}
           itemDetails={modalItemDetail}
+          onSuccess={onEditSuccess}
         />
       )}
 

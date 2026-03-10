@@ -227,7 +227,7 @@ const AddVendor = ({
           onChange={valueHandler}
           value={vendor.pan}
           name={"pan"}
-          label={"Pan Number"}
+          label={"PanS Number"}
         />
         <Input
           mandatory={true}
