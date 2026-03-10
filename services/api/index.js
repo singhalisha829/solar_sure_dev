@@ -1,33 +1,7 @@
 const { axiosInstance } = require("../ApiHandler");
 import { LocalStorageService } from "../LocalStorageHandler";
 
-// export const getDashBoardInfo = async (filters) => {
-//   const companyAccessibility =
-//     LocalStorageService.get("user_accessibility")?.accessibility[0]
-//       ?.company_access ?? {};
-
-//   let url = `/api/project/inroof-dashboard-v1/`;
-//   if (Object.keys(filters).length > 0) {
-//     const queryString = Object.entries(filters)
-//       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-//       .join("&");
-//     url = `${url}?${queryString}`;
-//     if (!companyAccessibility?.both_company) {
-//       url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-//     }
-//   } else {
-//     if (!companyAccessibility?.both_company) {
-//       url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-//     }
-//   }
-//   const response = await axiosInstance.get(url);
-//   return response;
-// };
-
 export const getDashBoardInfo = async (filters) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
 
   let url = `/api/project/inroof-dashboard-v1/`;
   const queryParams = [];
@@ -70,18 +44,8 @@ export const getDashBoardInfo = async (filters) => {
       queryParams.push(`${key}=${encodeURIComponent(value)}`);
     });
 
-    if (!companyAccessibility?.both_company) {
-      queryParams.push(
-        `company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`
-      );
-    }
-
     if (queryParams.length > 0) {
       url += `?${queryParams.join("&")}`;
-    }
-  } else {
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
     }
   }
 
@@ -136,10 +100,6 @@ export const editProject = async (id, project) => {
 };
 
 export const getProjects = async (queryParams = {}) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   let response, url;
   if (Object.keys(queryParams).length > 0) {
     // If queryParams is provided, construct the query string
@@ -147,15 +107,9 @@ export const getProjects = async (queryParams = {}) => {
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
     url = `api/project/project-v1/?${queryString}`;
-    if (!companyAccessibility?.both_company) {
-      url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   } else {
     // If no queryParams, just make a regular request
     url = "/api/project/project-v1/";
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   }
   response = await axiosInstance.get(url);
   return response;
@@ -180,10 +134,6 @@ export const getRegisteredProjectDetail = async (id) => {
 };
 
 export const getProjectRegistrationList = async (queryParams = {}) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   let response, url;
 
   if (Object.keys(queryParams).length > 0) {
@@ -192,15 +142,9 @@ export const getProjectRegistrationList = async (queryParams = {}) => {
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
     url = `api/project/project-registration-list-v1/?${queryString}`;
-    if (!companyAccessibility?.both_company) {
-      url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   } else {
     // If no queryParams, just make a regular request
     url = `api/project/project-registration-list-v1/`;
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   }
 
   response = await axiosInstance.get(url);
@@ -707,25 +651,14 @@ export const getSellerAddress = async () => {
 
 // site visit apis starts here...
 export const getSiteVisitList = async (queryParams = {}) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   let url = `/api/project/site-visit-v1/`;
   if (Object.keys(queryParams).length > 0) {
     const queryString = Object.entries(queryParams)
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
     url += `?${queryString}`;
-    if (!companyAccessibility?.both_company) {
-      url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
-  } else {
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
-  }
 
+  }
   const response = await axiosInstance.get(url);
   return response;
 };
@@ -834,10 +767,6 @@ export const getLeadSource = async (id) => {
 
 // packing list api start here..
 export const getPackingList = async (queryParams = {}) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   let response, url;
 
   if (Object.keys(queryParams).length > 0) {
@@ -846,15 +775,9 @@ export const getPackingList = async (queryParams = {}) => {
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
     url = `/api/project/packing-list-v1/?${queryString}`;
-    if (!companyAccessibility?.both_company) {
-      url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   } else {
     // If no queryParams, just make a regular request
     url = `/api/project/packing-list-v1/`;
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   }
   response = await axiosInstance.get(url);
   return response;
@@ -915,10 +838,6 @@ export const deletePackingListInvoice = async (id) => {
 };
 
 export const getInvoices = async (queryParams = {}) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   let response, url;
 
   if (Object.keys(queryParams).length > 0) {
@@ -927,15 +846,9 @@ export const getInvoices = async (queryParams = {}) => {
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
     url = `/api/project/invoices-v1/?${queryString}`;
-    if (!companyAccessibility?.both_company) {
-      url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   } else {
     // If no queryParams, just make a regular request
     url = `/api/project/invoices-v1/`;
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   }
   response = await axiosInstance.get(url);
   return response;
@@ -1112,10 +1025,6 @@ export const deleteProjectPaymentInvoice = async (id) => {
 
 // reports api starts here..
 export const getReports = async (queryParams = {}) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   let url, response;
 
   if (Object.keys(queryParams).length > 0) {
@@ -1124,15 +1033,9 @@ export const getReports = async (queryParams = {}) => {
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
     url = `/api/project/ongoing-project-tracking-v1/?${queryString}`;
-    if (!companyAccessibility?.both_company) {
-      url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   } else {
     // If no queryParams, just make a regular request
     url = `/api/project/ongoing-project-tracking-v1/`;
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   }
   response = await axiosInstance.get(url);
   return response;
@@ -1397,10 +1300,6 @@ export const approveContingency = async (id, data) => {
 
 // payment tracking starts here..
 export const fetchPaymentTracking = async (queryParams = {}) => {
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   let url, response;
 
   if (Object.keys(queryParams).length > 0) {
@@ -1409,15 +1308,9 @@ export const fetchPaymentTracking = async (queryParams = {}) => {
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
     url = `/api/project/project-payment-tracking-v1/?${queryString}`;
-    if (!companyAccessibility?.both_company) {
-      url += `&company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   } else {
     // If no queryParams, just make a regular request
     url = `/api/project/project-payment-tracking-v1/`;
-    if (!companyAccessibility?.both_company) {
-      url += `?company_type=${companyAccessibility?.only_ornate ? "ornate" : "sg"}`;
-    }
   }
   response = await axiosInstance.get(url);
   return response;
