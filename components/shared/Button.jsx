@@ -41,34 +41,29 @@ const Button = ({
       background = `${disabled ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed" : "white"}`;
       break;
     case "inverted":
-      background = `${
-        disabled
-          ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed"
-          : "bg-[#fef0e8] transition-colors duration-500 hover:bg-[#fDd9c4]"
-      }`;
+      background = `${disabled
+        ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed"
+        : "bg-[#fef0e8] transition-colors duration-500 hover:bg-primary-light-10"
+        }`;
       break;
     case "gray":
-      background = `${
-        disabled
-          ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed"
-          : "bg-zinc-100 transition-colors duration-500 hover:bg-zinc-300"
-      }`;
+      background = `${disabled
+        ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed"
+        : "bg-zinc-100 transition-colors duration-500 hover:bg-zinc-300"
+        }`;
       break;
     default:
-      background = `${
-        disabled
-          ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed"
-          : "bg-primary transition-colors duration-500 hover:bg-[#D65F0A]"
-      }`;
+      background = `${disabled
+        ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed"
+        : "bg-primary transition-colors duration-500 hover:bg-primary/80"
+        }`;
   }
 
   return (
     <button
-      className={`flex gap-2.5 items-center justify-center text-xs font-bold tracking-tight py-2 ${
-        className ? className : ""
-      } ${width} ${background} ${
-        customText ? customText : "text-white"
-      } rounded-md py-1`}
+      className={`flex gap-2.5 items-center justify-center text-xs font-bold tracking-tight py-2 ${className ? className : ""
+        } ${width} ${background} ${customText ? customText : "text-white"
+        } rounded-md py-1`}
       onClick={onClick}
       disabled={disabled}
       title={title}

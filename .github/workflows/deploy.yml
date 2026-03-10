@@ -1,72 +1,72 @@
-name: Self-Hosted In Roof
+# name: Self-Hosted In Roof
 
-on:
-  push:
-    branches:
-      - main # Trigger workflow on changes to the 'ci/cd' branch
+# on:
+#   workflow_dispatch:
+#   # push:
+#   #   branches:
+#   #     - main # Trigger workflow on changes to the 'ci/cd' branch
 
-jobs:
-  build-and-deploy:
-    runs-on: blacksmith-8vcpu-ubuntu-2404-arm
+# jobs:
+#   build-and-deploy:
+#     runs-on: blacksmith-8vcpu-ubuntu-2404-arm
 
-    steps:
-      # Step 1: Check out the repository
-      - name: Checkout Code
-        uses: actions/checkout@v3
+#     steps:
+#       # Step 1: Check out the repository
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
 
-      # Step 1.5: Configure AWS Credentials
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+#       # Step 1.5: Configure AWS Credentials
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_REGION }}
 
-      # Step 2: Authenticate to Amazon ECR
-      - name: Authenticate to Amazon ECR
-        run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{secrets.AWS_ECR_URL}}
+#       # Step 2: Authenticate to Amazon ECR
+#       - name: Authenticate to Amazon ECR
+#         run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{secrets.AWS_ECR_URL}}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v2
 
-      # Step 3: Create .env
-      - name: Create .env
-        run: |
-          echo "NEXT_PUBLIC_API_TOKEN=${{ secrets.NEXT_PUBLIC_API_TOKEN }}" >> .env
-          echo "NEXT_PUBLIC_NOPA_SERVER=${{ secrets.NEXT_PUBLIC_NOPA_SERVER }}" >> .env
-          echo "SERVER=${{ secrets.SERVER }}" >> .env
+#       # Step 3: Create .env
+#       - name: Create .env
+#         run: |
+#           echo "NEXT_PUBLIC_API_TOKEN=${{ secrets.NEXT_PUBLIC_API_TOKEN }}" >> .env
+#           echo "NEXT_PUBLIC_NOPA_SERVER=${{ secrets.NEXT_PUBLIC_NOPA_SERVER }}" >> .env
+#           echo "SERVER=${{ secrets.SERVER }}" >> .env
 
-      # Step 4: Build and Push Docker Image
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.AWS_ECR_URL }}/ornate/in-roof:latest
+#       # Step 4: Build and Push Docker Image
+#       - name: Build and Push Docker Image
+#         uses: docker/build-push-action@v4
+#         with:
+#           context: .
+#           push: true
+#           tags: ${{ secrets.AWS_ECR_URL }}/ornate/in-roof:latest
 
+#       # Step 5: Deploy to AWS EC2
+#       - name: Deploy to AWS EC2
+#         run: |
+#           # Create the SSH key file
+#           echo "${{ secrets.AWS_EC2_PEM_KEY }}" > ec2-key.pem
+#           chmod 600 ec2-key.pem
 
-      # Step 5: Deploy to AWS EC2
-      - name: Deploy to AWS EC2
-        run: |
-          # Create the SSH key file
-          echo "${{ secrets.AWS_EC2_PEM_KEY }}" > ec2-key.pem
-          chmod 600 ec2-key.pem
+#           # SSH into EC2 and deploy the container
+#           ssh -o StrictHostKeyChecking=no -i ec2-key.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
+#             mkdir -p /home/ec2-user/inroof-env-files
+#             # Ensure the .env file is available
+#             echo "NEXT_PUBLIC_API_TOKEN=${{ secrets.NEXT_PUBLIC_API_TOKEN }}" > /home/ec2-user/inroof-env-files/.env
+#             echo "NEXT_PUBLIC_NOPA_SERVER=${{ secrets.NEXT_PUBLIC_NOPA_SERVER }}" >> /home/ec2-user/inroof-env-files/.env
+#             echo "SERVER=${{ secrets.SERVER }}" >> /home/ec2-user/inroof-env-files/.env
 
-          # SSH into EC2 and deploy the container
-          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
-            mkdir -p /home/ec2-user/inroof-env-files
-            # Ensure the .env file is available
-            echo "NEXT_PUBLIC_API_TOKEN=${{ secrets.NEXT_PUBLIC_API_TOKEN }}" > /home/ec2-user/inroof-env-files/.env
-            echo "NEXT_PUBLIC_NOPA_SERVER=${{ secrets.NEXT_PUBLIC_NOPA_SERVER }}" >> /home/ec2-user/inroof-env-files/.env
-            echo "SERVER=${{ secrets.SERVER }}" >> /home/ec2-user/inroof-env-files/.env
+#             aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{secrets.AWS_ECR_URL}}
+#             docker stop inroof || true
+#             docker rm inroof || true
+#             docker pull ${{secrets.AWS_ECR_URL}}/ornate/in-roof:latest
+#             docker run -d --name inroof --env-file /home/ec2-user/inroof-env-files/.env -p 3002:3002 ${{secrets.AWS_ECR_URL}}/ornate/in-roof:latest
+#             docker system prune -f
+#           EOF
 
-            aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{secrets.AWS_ECR_URL}}
-            docker stop inroof || true
-            docker rm inroof || true
-            docker pull ${{secrets.AWS_ECR_URL}}/ornate/in-roof:latest
-            docker run -d --name inroof --env-file /home/ec2-user/inroof-env-files/.env -p 3002:3002 ${{secrets.AWS_ECR_URL}}/ornate/in-roof:latest
-            docker system prune -f
-          EOF
-
-          # Clean up the SSH key
-          rm -f ec2-key.pem
+#           # Clean up the SSH key
+#           rm -f ec2-key.pem

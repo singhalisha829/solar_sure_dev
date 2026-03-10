@@ -4,14 +4,14 @@ import "@/styles/dropdown.css";
 import "@/styles/globals.css";
 import "@/styles/login.css";
 import "@/styles/leaflet.css";
-import { Mulish } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Toaster } from "sonner";
 
-const mulish = Mulish({
+const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
-  variable: "--font-Mulish",
+  variable: "--font-Nunito-Sans",
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }) {
 
   if (router.pathname === "/404") {
     return (
-      <main className={`${mulish.variable} font-sans`}>
+      <main className={`${nunito_sans.variable} font-sans`}>
         <Head>
           <title>Ornate Dashboard</title>
         </Head>
@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }) {
   // Alternate flow layout
   if (isAlternate) {
     return (
-      <main className={`${mulish.variable} font-sans bg-zinc-100`}>
+      <main className={`${nunito_sans.variable} font-sans bg-zinc-100`}>
         <Head>
           <title>Alternate Dashboard</title>
         </Head>
@@ -61,7 +61,7 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <main className={`${mulish.variable} font-sans text-textcolor`}>
+    <main className={`${nunito_sans.variable} font-sans text-textcolor`}>
       <Head>
         <title>Ornate Dashboard</title>
       </Head>

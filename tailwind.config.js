@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-Mulish)"],
+        sans: ["var(--font-Nunito-Sans)", "sans-serif"],
       },
       fontWeight: {
         thin: 100,

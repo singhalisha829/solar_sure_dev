@@ -26,6 +26,7 @@ function Layout({ children }) {
     const userInfo = LocalStorageService.get("user");
     const token = LocalStorageService.get("access_token");
     const accessibilityInfo = LocalStorageService.get("user_accessibility");
+    console.log('accessibilityInfo', accessibilityInfo);
     if (userInfo) {
       setUser(userInfo);
       setAccessibility(accessibilityInfo);

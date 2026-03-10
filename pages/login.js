@@ -33,7 +33,13 @@ const Login = () => {
     <div className="container">
       <div className="box">
         <div className="mt-[-30px]">
-          <Image src="/Ornate-Solar-Logo.png" width={200} height={50} alt="" />
+          <Image
+            src="https://solarsure.in/wp-content/uploads/2025/08/cropped-Landscape_Logo-scaled-1-203x33.png"
+            width={300}
+            height={33}
+            alt="solar sure logo"
+            className="custom-logo"
+          />
         </div>
         <div className="content">Enter your login details</div>
         <form onSubmit={onSubmit} className="input_area">

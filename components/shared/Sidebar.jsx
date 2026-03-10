@@ -44,11 +44,11 @@ const routes = [
     path: "/",
     icon: <BsFillGrid1X2Fill />,
   },
-  {
-    name: "Workplace",
-    path: "/workplace",
-    icon: <BsBriefcaseFill className="h-[18px] w-[18px]" />,
-  },
+  // {
+  //   name: "Workplace",
+  //   path: "/workplace",
+  //   icon: <BsBriefcaseFill className="h-[18px] w-[18px]" />,
+  // },
   {
     name: "Projects",
     path: "/projects",
@@ -69,11 +69,11 @@ const routes = [
     path: "/project-registration",
     icon: <GiArchiveRegister className="h-[18px] w-[18px]" />,
   },
-  {
-    name: "Leads",
-    path: "/leads",
-    icon: <BsBuildingsFill className="h-[18px] w-[18px]" />,
-  },
+  // {
+  //   name: "Leads",
+  //   path: "/leads",
+  //   icon: <BsBuildingsFill className="h-[18px] w-[18px]" />,
+  // },
   {
     name: "Purchase Order",
     path: "/purchase-order",
