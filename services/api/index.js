@@ -1,6 +1,14 @@
 const { axiosInstance } = require("../ApiHandler");
 import { LocalStorageService } from "../LocalStorageHandler";
 
+const buildUrl = (base, queryParams = {}) => {
+  if (Object.keys(queryParams).length === 0) return base;
+  const queryString = Object.entries(queryParams)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join("&");
+  return `${base}?${queryString}`;
+};
+
 export const getDashBoardInfo = async (filters) => {
 
   let url = `/api/project/inroof-dashboard-v1/`;
@@ -68,14 +76,7 @@ export const createCompany = async (company) => {
   return response;
 };
 export const getCompanies = async (queryParams = {}) => {
-  let url = "/api/project/company/";
-  if (Object.keys(queryParams).length > 0) {
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url += `?${queryString}`;
-  }
-  const response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/company/", queryParams));
   return response;
 };
 export const editCompany = async (id, company) => {
@@ -100,18 +101,7 @@ export const editProject = async (id, project) => {
 };
 
 export const getProjects = async (queryParams = {}) => {
-  let response, url;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url = `api/project/project-v1/?${queryString}`;
-  } else {
-    // If no queryParams, just make a regular request
-    url = "/api/project/project-v1/";
-  }
-  response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/project-v1/", queryParams));
   return response;
 };
 export const getProject = async (id) => {
@@ -134,20 +124,7 @@ export const getRegisteredProjectDetail = async (id) => {
 };
 
 export const getProjectRegistrationList = async (queryParams = {}) => {
-  let response, url;
-
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url = `api/project/project-registration-list-v1/?${queryString}`;
-  } else {
-    // If no queryParams, just make a regular request
-    url = `api/project/project-registration-list-v1/`;
-  }
-
-  response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("api/project/project-registration-list-v1/", queryParams));
   return response;
 };
 
@@ -209,14 +186,7 @@ export const assignManufacturer = async (data) => {
   return response;
 };
 export const getManufacturers = async (queryParams = {}) => {
-  let url = "/api/project/manufacturer/";
-  if (Object.keys(queryParams).length > 0) {
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url += `?${queryString}`;
-  }
-  const response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/manufacturer/", queryParams));
   return response;
 };
 export const createManufacturer = async (data) => {
@@ -232,14 +202,7 @@ export const editManufacturer = async (id, data) => {
 };
 
 export const getVendors = async (queryParams = {}) => {
-  let url = "/api/project/vendor/";
-  if (Object.keys(queryParams).length > 0) {
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url += `?${queryString}`;
-  }
-  const response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/vendor/", queryParams));
   return response;
 };
 export const createVendor = async (data) => {
@@ -363,17 +326,7 @@ export const updateTask = async (data) => {
   return response;
 };
 export const getUnits = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    response = await axiosInstance.get(`/api/project/unit/?${queryString}`);
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/unit/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/unit/", queryParams));
   return response;
 };
 export const getProducts = async (queryParams = {}) => {
@@ -470,21 +423,7 @@ export const getProductType = async () => {
 };
 
 export const getBOMTemplates = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/item-create-template/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get(`/api/project/item-create-template/`);
-  }
-
+  const response = await axiosInstance.get(buildUrl("/api/project/item-create-template/", queryParams));
   return response;
 };
 
@@ -549,38 +488,12 @@ export const deleteSections = async (id) => {
 
 // purchase order api starts here
 export const getPurchaseOrders = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/vendor-purchase-order-list/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get(
-      "/api/project/vendor-purchase-order-list/"
-    );
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/vendor-purchase-order-list/", queryParams));
   return response;
 };
 
 export const getPurchaseOrderDetails = async (queryParams) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/vendor-purchase-order/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/vendor-purchase-order/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/vendor-purchase-order/", queryParams));
   return response;
 };
 
@@ -651,15 +564,7 @@ export const getSellerAddress = async () => {
 
 // site visit apis starts here...
 export const getSiteVisitList = async (queryParams = {}) => {
-  let url = `/api/project/site-visit-v1/`;
-  if (Object.keys(queryParams).length > 0) {
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url += `?${queryString}`;
-
-  }
-  const response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/site-visit-v1/", queryParams));
   return response;
 };
 
@@ -767,19 +672,7 @@ export const getLeadSource = async (id) => {
 
 // packing list api start here..
 export const getPackingList = async (queryParams = {}) => {
-  let response, url;
-
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url = `/api/project/packing-list-v1/?${queryString}`;
-  } else {
-    // If no queryParams, just make a regular request
-    url = `/api/project/packing-list-v1/`;
-  }
-  response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/packing-list-v1/", queryParams));
   return response;
 };
 
@@ -838,19 +731,7 @@ export const deletePackingListInvoice = async (id) => {
 };
 
 export const getInvoices = async (queryParams = {}) => {
-  let response, url;
-
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url = `/api/project/invoices-v1/?${queryString}`;
-  } else {
-    // If no queryParams, just make a regular request
-    url = `/api/project/invoices-v1/`;
-  }
-  response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/invoices-v1/", queryParams));
   return response;
 };
 
@@ -887,14 +768,7 @@ export const fetchUnbookedInvoiceItems = async (invoiceId, packingListId) => {
 
 // epc api starts here..
 export const getEpcs = async (queryParams = {}) => {
-  let url = "/api/project/epc/";
-  if (Object.keys(queryParams).length > 0) {
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url += `?${queryString}`;
-  }
-  const response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/epc/", queryParams));
   return response;
 };
 
@@ -921,38 +795,12 @@ export const addProjectInstaller = async (data) => {
 
 // payments api starts here..
 export const getProjectPayments = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/project-payment-list/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/project-payment-list/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/project-payment-list/", queryParams));
   return response;
 };
 
 export const getInvoicePayments = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/project-invoice-list/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/project-invoice-list/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/project-invoice-list/", queryParams));
   return response;
 };
 // payment api ends here..
@@ -1025,19 +873,7 @@ export const deleteProjectPaymentInvoice = async (id) => {
 
 // reports api starts here..
 export const getReports = async (queryParams = {}) => {
-  let url, response;
-
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url = `/api/project/ongoing-project-tracking-v1/?${queryString}`;
-  } else {
-    // If no queryParams, just make a regular request
-    url = `/api/project/ongoing-project-tracking-v1/`;
-  }
-  response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/ongoing-project-tracking-v1/", queryParams));
   return response;
 };
 // reports api ends here..
@@ -1069,20 +905,7 @@ export const deleteLedger = async (id) => {
 };
 
 export const getLedger = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/inventory-stock-in/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/inventory-stock-in/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/inventory-stock-in/", queryParams));
   return response;
 };
 
@@ -1121,40 +944,12 @@ export const addProjectStaff = async (data) => {
 
 // transporter details api starts here..
 export const getInvoiceTransportationDetailsList = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `api/project/invoice-transportation-details/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get(
-      "api/project/invoice-transportation-details/"
-    );
-  }
+  const response = await axiosInstance.get(buildUrl("api/project/invoice-transportation-details/", queryParams));
   return response;
 };
 
 export const getDispatchDetailsList = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `api/project/packing-list-details/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("api/project/packing-list-details/");
-  }
+  const response = await axiosInstance.get(buildUrl("api/project/packing-list-details/", queryParams));
   return response;
 };
 
@@ -1187,20 +982,7 @@ export const getTransporterList = async () => {
 };
 
 export const getSunlightTransporters = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `api/logistics/get-transporter/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("api/logistics/get-transporter/");
-  }
+  const response = await axiosInstance.get(buildUrl("api/logistics/get-transporter/", queryParams));
   return response;
 };
 // transporter details api ends here..
@@ -1247,20 +1029,7 @@ export const deleteContigencyItems = async (id) => {
 };
 
 export const getBOMContigency = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/bom-contingency/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/bom-contingency/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/bom-contingency/", queryParams));
   return response;
 };
 
@@ -1300,19 +1069,7 @@ export const approveContingency = async (id, data) => {
 
 // payment tracking starts here..
 export const fetchPaymentTracking = async (queryParams = {}) => {
-  let url, response;
-
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-    url = `/api/project/project-payment-tracking-v1/?${queryString}`;
-  } else {
-    // If no queryParams, just make a regular request
-    url = `/api/project/project-payment-tracking-v1/`;
-  }
-  response = await axiosInstance.get(url);
+  const response = await axiosInstance.get(buildUrl("/api/project/project-payment-tracking-v1/", queryParams));
   return response;
 };
 // payment tracking api ends here..
@@ -1509,22 +1266,7 @@ export const getUnitPriceAvg = async (itemList = []) => {
 };
 
 export const getItemPoList = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/vendor-purchase-order-product-list/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get(
-      "/api/project/vendor-purchase-order-product-list/"
-    );
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/vendor-purchase-order-product-list/", queryParams));
   return response;
 };
 
@@ -1536,38 +1278,12 @@ export const getRoleAccessibilityInfo = async () => {
 };
 
 export const fetchProjectReports = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/project-report/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/project-report/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/project-report/", queryParams));
   return response;
 };
 
 export const fetchProjectFinancials = async (queryParams = {}) => {
-  let response;
-  if (Object.keys(queryParams).length > 0) {
-    // If queryParams is provided, construct the query string
-    const queryString = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-      .join("&");
-
-    response = await axiosInstance.get(
-      `/api/project/detailed-project-report/?${queryString}`
-    );
-  } else {
-    // If no queryParams, just make a regular request
-    response = await axiosInstance.get("/api/project/detailed-project-report/");
-  }
+  const response = await axiosInstance.get(buildUrl("/api/project/detailed-project-report/", queryParams));
   return response;
 };
 export const fetchProjectConsumedReport = async (id) => {
