@@ -112,11 +112,11 @@ const ProjectDetailsPage = () => {
       key: "dashboard_tab",
       icon: <BsFillGrid1X2Fill />,
     },
-    {
-      name: "Schedule",
-      key: "schedule_tab",
-      icon: <BsCalendarRange className="h-[18px] w-[18px]" />,
-    },
+    // {
+    //   name: "Schedule",
+    //   key: "schedule_tab",
+    //   icon: <BsCalendarRange className="h-[18px] w-[18px]" />,
+    // },
     {
       name: "Engineering",
       key: "engineering_tab",
