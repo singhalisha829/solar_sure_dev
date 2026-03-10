@@ -36,7 +36,8 @@ export default function App({ Component, pageProps }) {
     return (
       <main className={`${nunito_sans.variable} font-sans`}>
         <Head>
-          <title>Ornate Dashboard</title>
+          <title>Solar Sure</title>
+          <link rel="icon" href="https://solarsure.in/wp-content/uploads/2025/08/cropped-Portrait_Logo-scaled-1-32x32.png" />
         </Head>
         <Component {...pageProps} />
       </main>
@@ -49,6 +50,7 @@ export default function App({ Component, pageProps }) {
       <main className={`${nunito_sans.variable} font-sans bg-zinc-100`}>
         <Head>
           <title>Alternate Dashboard</title>
+          <link rel="icon" href="https://solarsure.in/wp-content/uploads/2025/08/cropped-Portrait_Logo-scaled-1-32x32.png" />
         </Head>
         <ModalProvider>
           <section className="h-screen grow basis-[85%] overflow-scroll rounded-2xl px-4 md:px-8 py-5 flex flex-col gap-5  print:h-fit">
@@ -63,7 +65,8 @@ export default function App({ Component, pageProps }) {
   return (
     <main className={`${nunito_sans.variable} font-sans text-textcolor`}>
       <Head>
-        <title>Ornate Dashboard</title>
+        <title>Solar Sure</title>
+        <link rel="icon" href="https://solarsure.in/wp-content/uploads/2025/08/cropped-Portrait_Logo-scaled-1-32x32.png" />
       </Head>
       <ModalProvider>
         <Layout>
