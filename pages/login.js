@@ -90,7 +90,7 @@ const Login = () => {
         </div>
         <div className="mt-[10px] flex w-full flex-col items-center justify-center gap-4">
           <button
-            className="login_button common"
+            className="login_button common bg-secondary hover:bg-secondary/80 disabled:bg-zinc-800/10 disabled:hover:bg-zinc-800/10 disabled:cursor-not-allowed"
             style={{ margin: "0" }}
             onClick={() => {
               onSubmit();

@@ -210,7 +210,7 @@ const Sidebar = ({ user, accessibility }) => {
   };
 
   return (
-    <aside className="flex flex-col h-full gap-8 bg-charlestongreen py-8 text-white w-[180px] z-[5000]">
+    <aside className="flex flex-col min-h-full gap-8 bg-charlestongreen py-8 text-white w-[180px] z-[5000]">
       {/* Logo */}
       <Link href={"/"} className="flex px-5 cursor-pointer justify-center">
         <Image

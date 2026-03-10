@@ -48,14 +48,14 @@ function Layout({ children }) {
               <ProductProvider>
                 <StateCityProvider>
                   <ProjectProvider>
-                    <main className="relative flex min-h-screen gap-4 bg-zinc-100">
-                      <div className="hidden md:block">
+                    <main className="relative flex h-screen overflow-hidden gap-4 bg-zinc-100">
+                      <div className="hidden md:flex md:flex-col h-full overflow-y-auto bg-charlestongreen">
                         <Sidebar user={user} accessibility={accessibility} />
                       </div>
 
                       {/* MAIN CONTENT */}
 
-                      <section className="h-screen grow basis-[85%] overflow-scroll rounded-2xl px-4 md:px-8 py-5 flex flex-col gap-5  print:h-fit">
+                      <section className="grow basis-[85%] overflow-y-auto rounded-2xl px-4 md:px-8 py-5 flex flex-col gap-5 print:h-fit">
                         <div className="flex items-center gap-4 md:hidden">
                           <Sheet>
                             <SheetTrigger></SheetTrigger>
