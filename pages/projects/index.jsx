@@ -50,20 +50,11 @@ const ProjectsPage = () => {
     LocalStorageService.get("user_accessibility")?.accessibility[0].projects ??
     {};
 
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access.both_company ?? false;
-
   const projectSizeList = [
     { name: "1 - 100 KW", value: "1-100" },
     { name: "100 - 500 KW", value: "100-500" },
     { name: "500 KW - 1 MW", value: "500-1000" },
     { name: "1 MW - More", value: "1000-" },
-  ];
-
-  const companyTypeList = [
-    { name: "Ornate", value: "ornate" },
-    { name: "SG Ornate", value: "sg" },
   ];
 
   const stageList = [
@@ -78,18 +69,6 @@ const ProjectsPage = () => {
   const statusList = [{ name: "Active" }, { name: "Hold" }, { name: "Closed" }];
 
   const filterList = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          type: "dropdown",
-          options: companyTypeList,
-          optionName: "name",
-          optionId: "value",
-          key: "company_type",
-        },
-      ]
-      : []),
     {
       name: "Status",
       type: "dropdown",
@@ -159,17 +138,6 @@ const ProjectsPage = () => {
   ];
 
   const ProjectsHeader = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          key: "is_ornate_project",
-          type: "company_type",
-          width: "10rem",
-          sortable: true,
-        },
-      ]
-      : []),
     {
       name: "Project Name",
       key: "name",

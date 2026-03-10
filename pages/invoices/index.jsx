@@ -66,15 +66,6 @@ const Invoices = () => {
     LocalStorageService.get("user_accessibility").accessibility[0].packing_list
       .pages.ornate_invoices ?? {};
 
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access.both_company ?? false;
-
-  const companyTypeList = [
-    { name: "Ornate", value: "ornate" },
-    { name: "SG Ornate", value: "sg" },
-  ];
-
   const allowedActions =
     (accessibilityInfo?.edit_invoice ? "edit-" : "") +
     (accessibilityInfo?.delete_invoice ? "delete" : "");
@@ -108,18 +99,6 @@ const Invoices = () => {
   }, []);
 
   const filterList = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          type: "dropdown",
-          options: companyTypeList,
-          optionName: "name",
-          optionId: "value",
-          key: "company_type",
-        },
-      ]
-      : []),
     {
       name: "Vendor",
       type: "dropdown",
@@ -137,17 +116,6 @@ const Invoices = () => {
   ];
 
   const tableHeader = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          key: "is_ornate_project",
-          type: "company_type",
-          width: "10rem",
-          sortable: true,
-        },
-      ]
-      : []),
     {
       name: "Packing List No.",
       sortable: true,

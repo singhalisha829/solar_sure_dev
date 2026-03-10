@@ -64,14 +64,6 @@ const ProjectRegistrationDetail = ({
     { name: "BESS" },
   ];
 
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access?.both_company ?? false;
-
-  const companyTypeList = [
-    { name: "Ornate", value: true },
-    { name: "SG Ornate", value: false },
-  ];
 
   useEffect(() => {
     getStatesHandler();
@@ -235,10 +227,7 @@ const ProjectRegistrationDetail = ({
       toast.error("Please Enter a valid Registration No.");
       return;
     }
-    if (projectRegistrationDetails.is_ornate_project === "") {
-      toast.error("Field Company Type is empty!");
-      return;
-    }
+
     // const keysToCheck = {
     //   company: "Customer",
     //   project_site: "Project Site",
@@ -295,10 +284,7 @@ const ProjectRegistrationDetail = ({
         "registration_no",
         projectRegistrationDetails.registration_no
       );
-      formData.append(
-        "is_ornate_project",
-        projectRegistrationDetails.is_ornate_project
-      );
+
       formData.append(
         "type_of_project",
         projectRegistrationDetails.type_of_project
@@ -559,37 +545,9 @@ const ProjectRegistrationDetail = ({
                   : ""
               }
             />
-            {companyAccessibility ? (
-              <SelectForObjects
-                margin={"0px"}
-                mandatory
-                height={"36px"}
-                setselected={(name, value) => {
-                  setProjectRegistrationDetails({
-                    ...projectRegistrationDetails,
-                    is_ornate_project: value,
-                  });
-                  setEditData({
-                    ...editData,
-                    is_ornate_project: value,
-                  });
-                }}
-                selected={
-                  projectRegistrationDetails?.is_ornate_project === ""
-                    ? ""
-                    : projectRegistrationDetails?.is_ornate_project
-                      ? "Ornate"
-                      : "SG Ornate"
-                }
-                options={companyTypeList}
-                optionName={"name"}
-                optionID={"value"}
-                placeholder="Select Company Type"
-                dropdownLabel={"Select Company Type"}
-              />
-            ) : (
-              <span></span>
-            )}
+
+            <span></span>
+
 
             <SelectForObjects
               margin={"0px 0px 10px 0px"}

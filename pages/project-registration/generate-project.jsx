@@ -42,10 +42,6 @@ const GenerateProject = () => {
   const [totalProjectCapacity, setTotalProjectCapacity] = useState(0);
   const [formErrors, setFormErrors] = useState({});
 
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access ?? {};
-
   const projectRegistrationDetails = {
     registration_no: "",
     date: "",
@@ -69,12 +65,7 @@ const GenerateProject = () => {
     po_capacity_in_kw: "",
     project_site_area_in_sq_feet: "",
     layout: [],
-    other_documents: [],
-    is_ornate_project: !companyAccessibility?.both_company
-      ? companyAccessibility?.only_ornate
-        ? true
-        : false
-      : "",
+    other_documents: []
   };
 
   const steps = [

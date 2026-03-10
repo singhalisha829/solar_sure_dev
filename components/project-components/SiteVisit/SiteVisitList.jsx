@@ -4,23 +4,11 @@ import Table from "@/components/SortableTable";
 const SiteVisitList = ({
   eventList,
   onEventClick,
-  companyAccessibility,
   pagination,
   totalCount,
   onPageChange
 }) => {
   const tableHeader = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          key: "is_ornate_project",
-          type: "company_type",
-          width: "10rem",
-          sortable: true,
-        },
-      ]
-      : []),
     {
       name: "Employee",
       key: "employe_name",

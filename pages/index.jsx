@@ -28,7 +28,6 @@ function Home() {
     state: "",
     customer: "",
     customer_name: "",
-    company_type: "",
     stage: "",
     project_type: "",
     project_start_date: null,
@@ -38,14 +37,6 @@ function Home() {
   });
   const user = LocalStorageService.get("user");
   const token = LocalStorageService.get("access_token");
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access?.both_company ?? false;
-
-  const companyTypeList = [
-    { name: "Ornate", value: "ornate" },
-    { name: "SG Ornate", value: "sg" },
-  ];
 
   const stageList = [
     { name: "Created" },
@@ -171,30 +162,7 @@ function Home() {
               Filter Map View
             </h3>
             <div className="flex flex-col gap-[10px]">
-              {companyAccessibility && (
-                <SelectForObjects
-                  disableBorderLeft={true}
-                  height="30px"
-                  margin="0"
-                  dropdownLabel={"Filter By Company Type"}
-                  optionName="name"
-                  options={companyTypeList}
-                  placeholder="Select Company Type"
-                  optionID="value"
-                  disabled={false}
-                  setselected={(name, value) =>
-                    setFilters((prev) => ({
-                      ...prev,
-                      company_type: value,
-                    }))
-                  }
-                  selected={
-                    companyTypeList.filter(
-                      (type) => type.value === filters.company_type
-                    )[0]?.name
-                  }
-                />
-              )}
+
               <SelectForObjects
                 disableBorderLeft={true}
                 height="30px"

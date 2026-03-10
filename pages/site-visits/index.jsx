@@ -37,7 +37,6 @@ const SiteVisits = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({
     search: "",
-    company_type: "",
   });
 
   // Pagination hook for list view only
@@ -49,15 +48,6 @@ const SiteVisits = () => {
   const accessibilityInfo =
     LocalStorageService.get("user_accessibility").accessibility[0].site_visit ??
     {};
-
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access.both_company ?? false;
-
-  const companyTypeList = [
-    { name: "Ornate", value: "ornate" },
-    { name: "SG Ornate", value: "sg" },
-  ];
 
   useEffect(() => {
     // Fetch all data for calendar view on mount
@@ -200,37 +190,6 @@ const SiteVisits = () => {
               />
             }
           </div>
-
-          {companyAccessibility && (
-            <SelectForObjects
-              height="34px"
-              margin="0"
-              className={"w-[13rem]"}
-              optionName="name"
-              options={companyTypeList}
-              placeholder="Select Company Type"
-              optionID="value"
-              disabled={false}
-              setselected={(name, value) => {
-                setFilters((prev) => ({
-                  ...prev,
-                  company_type: value,
-                }));
-                // Fetch appropriate data based on current view
-                if (selectedView === "calendar") {
-                  fetchAllSiteVisits({ ...filters, company_type: value });
-                } else {
-                  resetToPageOne();
-                  fetchPaginatedSiteVisits({ ...filters, company_type: value }, 1, pagination.limit);
-                }
-              }}
-              selected={
-                companyTypeList.filter(
-                  (type) => type.value === filters.company_type
-                )[0]?.name
-              }
-            />
-          )}
         </div>
       </div>
       <div className="min-h-[85vh] overflow-hidden bg-white p-5">
@@ -252,7 +211,6 @@ const SiteVisits = () => {
               openModal("edit-site-visit");
               setSelectedEvent(data);
             }}
-            companyAccessibility={companyAccessibility}
             pagination={pagination}
             totalCount={totalSiteVisitsCount}
             onPageChange={handlePageChange}

@@ -28,10 +28,6 @@ const PreviewProject = () => {
     LocalStorageService.get("user_accessibility")?.accessibility[0]
       .project_registration ?? {};
 
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access?.both_company ?? false;
-
   const solarSectionColumnList = [
     { name: "MANUFACTURER", key: "Product_name", width: "10%" },
     { name: "MODEL", key: "model_name", width: "10%" },
@@ -375,12 +371,6 @@ const PreviewProject = () => {
           <span>
             <strong>Project Type:</strong> {formDetails?.type_of_project}
           </span>
-          {companyAccessibility && (
-            <span>
-              <strong>Company Type:</strong>{" "}
-              {formDetails?.is_ornate_project ? "Ornate" : "SG Ornate"}
-            </span>
-          )}
           <span>
             <strong>Customer:</strong> {formDetails?.company_name}
           </span>

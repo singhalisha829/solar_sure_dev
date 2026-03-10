@@ -46,13 +46,6 @@ const ProjectRegistration = () => {
     search: "",
   });
 
-  const userAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0];
-
-  const companyAccessibility =
-    userAccessibility?.company_access?.both_company ?? false;
-  const projectRegistrationAccess = userAccessibility?.project_registration;
-
   // Load saved filters on component mount
   useEffect(() => {
     const savedFilters = LocalStorageService.get(
@@ -81,11 +74,6 @@ const ProjectRegistration = () => {
     }
   }, []);
 
-  const companyTypeList = [
-    { name: "Ornate", value: "ornate" },
-    { name: "SG Ornate", value: "sg" },
-  ];
-
   const projectTypes = [
     { name: "Inroof" },
     { name: "Skin Roof" },
@@ -96,18 +84,6 @@ const ProjectRegistration = () => {
   ];
 
   const filterList = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          type: "dropdown",
-          options: companyTypeList,
-          optionName: "name",
-          optionId: "value",
-          key: "company_type",
-        },
-      ]
-      : []),
     {
       name: "Status",
       type: "dropdown",
@@ -135,17 +111,6 @@ const ProjectRegistration = () => {
   ];
 
   const tableHeader = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          key: "is_ornate_project",
-          type: "company_type",
-          width: "10rem",
-          sortable: true,
-        },
-      ]
-      : []),
     {
       name: "Registration Number",
       key: "registration_no",

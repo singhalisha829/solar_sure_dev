@@ -37,28 +37,7 @@ const OngoingProjects = () => {
     company_type: null,
   });
 
-  const companyAccessibility =
-    LocalStorageService.get("user_accessibility")?.accessibility[0]
-      ?.company_access.both_company ?? false;
-
-  const companyTypeList = [
-    { name: "Ornate", value: "ornate" },
-    { name: "SG Ornate", value: "sg" },
-  ];
-
   const filterList = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          type: "dropdown",
-          options: companyTypeList,
-          optionName: "name",
-          optionId: "value",
-          key: "company_type",
-        },
-      ]
-      : []),
     {
       name: "Date Range",
       type: "date",
@@ -68,17 +47,6 @@ const OngoingProjects = () => {
   ];
 
   const tableHeader = [
-    ...(companyAccessibility
-      ? [
-        {
-          name: "Company Type",
-          key: "is_ornate_project",
-          type: "company_type",
-          width: "10rem",
-          sortable: true,
-        },
-      ]
-      : []),
     {
       name: "Project",
       key: "project_name",
