@@ -46,6 +46,11 @@ const ProjectRegistration = () => {
     search: "",
   });
 
+  const userAccessibility =
+    LocalStorageService.get("user_accessibility")?.accessibility[0];
+
+  const projectRegistrationAccess = userAccessibility?.project_registration;
+
   // Load saved filters on component mount
   useEffect(() => {
     const savedFilters = LocalStorageService.get(
