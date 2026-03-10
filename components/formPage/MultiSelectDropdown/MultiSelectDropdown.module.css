@@ -270,12 +270,12 @@
   list-style: none;
 }
 .selectedText {
-  color: #f47920;
+  color: #14a850;
   font: 1rem;
   display: grid;
   place-items: center;
 }
 .add_text {
-  color: #f47920 !important;
+  color: #14a850 !important;
 }
 /* End of Mutli select */
