@@ -48,10 +48,6 @@ const ProjectPurchaseOrder = ({
   const [poItemList, setPoItemList] = useState([]);
   const [search, setSearch] = useState("");
   const [totalPoAmount, setTotalPoAmount] = useState(0);
-  const [nopaPortalDetails, setNopaPortalDetails] = useState({
-    baseUrl: "",
-    token: "",
-  });
 
   const accessibilityInfo =
     LocalStorageService.get("user_accessibility")?.accessibility[0]
@@ -132,7 +128,7 @@ const ProjectPurchaseOrder = ({
         });
       },
       onClickDownload: (row) => {
-        handlePODownload(row.purchase_order_number);
+        handlePODownload(row.id);
       },
     },
   ];
@@ -156,10 +152,6 @@ const ProjectPurchaseOrder = ({
           sum += Number(po.total_po_amount || 0);
         });
         setPurchaseOrders(data.data.output);
-        setNopaPortalDetails({
-          baseUrl: data.download_base_url,
-          token: data.NOPA_PORTAL_TOKEN,
-        });
         setTotalPoAmount(sum);
       },
       toast.error
@@ -185,15 +177,15 @@ const ProjectPurchaseOrder = ({
     );
   };
 
-  const handlePODownload = async (poNumber) => {
+  const handlePODownload = async (id) => {
     try {
       const response = await fetch(
-        `${nopaPortalDetails?.baseUrl}api/po/fetch-po-pdf/?po_no=${poNumber}`,
+        `${process.env.SERVER}/api/project/vendor-purchase-order-pdf/?id=${id}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/pdf",
-            Authorization: "Bearer " + nopaPortalDetails?.token,
+            Authorization: "token " + LocalStorageService.get("access_token"),
           },
         }
       );
