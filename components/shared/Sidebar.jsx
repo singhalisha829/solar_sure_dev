@@ -179,6 +179,11 @@ const routes = [
         icon: <FaTruckMoving className="h-[16px] w-[16px]" />,
       },
       {
+        name: "Users",
+        path: "/masters/users",
+        icon: <BsFillPeopleFill className="h-[14px] w-[14px]" />,
+      },
+      {
         name: "Role Accesibility",
         path: "/masters/role-accessibility",
         icon: <FaUserCog className="h-[16px] w-[16px]" />,

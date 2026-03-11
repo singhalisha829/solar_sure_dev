@@ -1001,6 +1001,16 @@ export const getUsers = async (queryParams = {}) => {
   return response;
 };
 
+export const createUser = async (data) => {
+  const response = await axiosInstance.post("api/accounts/users/", data);
+  return response;
+};
+
+export const editUser = async (id, data) => {
+  const response = await axiosInstance.put(`api/accounts/users/?user=${id}`, data);
+  return response;
+};
+
 //--------
 
 // contigency api starts here..
