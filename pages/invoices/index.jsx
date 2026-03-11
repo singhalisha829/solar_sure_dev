@@ -407,7 +407,7 @@ const Invoices = () => {
     <>
       <div className="flex justify-between items-center gap-4">
         <h2 className="text-primary text-xl font-bold tracking-tight">
-          Ornate Invoices
+          Invoices
         </h2>
 
         <div className="flex items-center gap-2">

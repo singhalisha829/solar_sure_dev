@@ -49,15 +49,13 @@ const UploadInvoice = () => {
     invoice_doc: "",
     remark: "",
     vendor: "",
-    invoice_type: "Ornate Invoice",
+    invoice_type: "Invoice",
   });
 
   const invoiceTypeList = [
-    { name: "Ornate Invoice" },
+    { name: "Invoice" },
     { name: "Delivery Challan" },
     { name: "Vendor Invoice" },
-    { name: "SG Invoice" },
-    { name: "SG Delivery Challan" },
   ];
 
   const tableHeader = [
@@ -362,7 +360,7 @@ const UploadInvoice = () => {
       invoice_items: list,
     };
 
-    if (formData.invoice_type === "Ornate Invoice") {
+    if (formData.invoice_type === "Invoice") {
       apiData = {
         ...apiData,
         invoice_no: formData.invoice_no,
@@ -389,25 +387,6 @@ const UploadInvoice = () => {
         vendor_invoice_amount_with_gst: formData.invoice_amount_with_gst,
         vendor_invoice_date: formData.invoice_date,
         vendor_invoice_doc: formData.invoice_doc,
-      };
-    } else if (formData.invoice_type === "SG Invoice") {
-      apiData = {
-        ...apiData,
-        sg_invoice_no: formData.invoice_no,
-        sg_invoice_amount_without_gst: formData.invoice_amount_without_gst,
-        sg_invoice_amount_with_gst: formData.invoice_amount_with_gst,
-        sg_invoice_date: formData.invoice_date,
-        sg_invoice_doc: formData.invoice_doc,
-      };
-    } else if (formData.invoice_type === "SG Delivery Challan") {
-      apiData = {
-        ...apiData,
-        sg_delivery_challan_no: formData.invoice_no,
-        sg_delivery_challan_amount_without_gst:
-          formData.invoice_amount_without_gst,
-        sg_delivery_challan_amount_with_gst: formData.invoice_amount_with_gst,
-        sg_delivery_challan_date: formData.invoice_date,
-        sg_delivery_challan_doc: formData.invoice_doc,
       };
     }
 

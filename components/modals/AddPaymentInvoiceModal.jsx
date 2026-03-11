@@ -132,7 +132,7 @@ const AddPaymentInvoiceModal = ({ modalId, projectId, onSuccessfullInvoiceSubmit
       id={modalId}
       onSubmit={onSubmit}
       ctaText={'Save'}
-      heading={modalId.split('-')[0] === 'add' ? 'Add Ornate Invoice' : 'Edit Ornate Invoice'}
+      heading={modalId.split('-')[0] === 'add' ? 'Add Invoice' : 'Edit Invoice'}
       onClose={() => {
         if (modalId.split('-')[0] === 'add') {
           clearForm();

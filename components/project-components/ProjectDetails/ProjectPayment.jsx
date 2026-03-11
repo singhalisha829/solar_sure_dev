@@ -314,15 +314,9 @@ const ProjectPayment = ({ projectBudget }) => {
         </span>
 
         <span>
-          <strong>Total Ornate Invoice Amount: </strong>₹
+          <strong>Total Invoice Amount: </strong>₹
           {paymentAmountDetails?.total_invoice_amount
             ? formatPrice(paymentAmountDetails?.total_invoice_amount)
-            : "-"}
-        </span>
-        <span>
-          <strong>Total SG Invoice Amount: </strong>₹
-          {paymentAmountDetails?.sg_ornate_invoice_total_amount
-            ? formatPrice(paymentAmountDetails?.sg_ornate_invoice_total_amount)
             : "-"}
         </span>
 

@@ -270,7 +270,7 @@ const EditInvoice = () => {
               />
 
               {/* display ornate invoice details */}
-              <strong className="col-span-2">Ornate Invoice Details</strong>
+              <strong className="col-span-2">Invoice Details</strong>
               <Input
                 type="text"
                 value={formData.invoice_no}
@@ -417,111 +417,6 @@ const EditInvoice = () => {
                       className="cursor-pointer mb-3"
                       onClick={() =>
                         window.open(formData.vendor_invoice_doc, "__blank")
-                      }
-                    />
-                  )}
-              </span>
-
-              {/* display sg invoice details */}
-              <strong className="col-span-2">SG Invoice Details</strong>
-              <Input
-                type="text"
-                value={formData.sg_invoice_no}
-                onChange={valueHandler}
-                label={"Invoice No."}
-                mandatory={true}
-                name="sg_invoice_no"
-              />
-              <Input
-                type="date"
-                value={formData.sg_invoice_date}
-                onChange={valueHandler}
-                label={"Invoice Date"}
-                mandatory={true}
-                name="sg_invoice_date"
-              />
-              <Input
-                type="number"
-                value={formData.sg_invoice_amount_without_gst}
-                onChange={valueHandler}
-                label={"Invoice Amount (Without tax)"}
-                name="sg_invoice_amount_without_gst"
-                mandatory={true}
-              />
-              <Input
-                type="number"
-                value={formData.sg_invoice_amount_with_gst}
-                onChange={valueHandler}
-                label={"Invoice Amount (With tax)"}
-                name="sg_invoice_amount_with_gst"
-                mandatory={true}
-              />
-              <span className="w-full flex gap-2 items-end">
-                <Input
-                  type="file"
-                  onChange={(e) => handleFile(e, "sg_invoice_doc")}
-                  label={"Invoice Doc"}
-                />
-                {formData.sg_invoice_doc && formData.sg_invoice_doc !== "" && (
-                  <FaEye
-                    size={15}
-                    className="cursor-pointer mb-3"
-                    onClick={() =>
-                      window.open(formData.sg_invoice_doc, "__blank")
-                    }
-                  />
-                )}
-              </span>
-
-              {/* display sg delivery challan details */}
-              <strong className="col-span-2">
-                SG Delivery Challan Details
-              </strong>
-              <Input
-                type="text"
-                value={formData.sg_delivery_challan_no}
-                onChange={valueHandler}
-                label={"Invoice No."}
-                mandatory={true}
-                name="sg_delivery_challan_no"
-              />
-              <Input
-                type="date"
-                value={formData.sg_delivery_challan_date}
-                onChange={valueHandler}
-                label={"Invoice Date"}
-                mandatory={true}
-                name="sg_delivery_challan_date"
-              />
-              <Input
-                type="number"
-                value={formData.sg_delivery_challan_amount_without_gst}
-                onChange={valueHandler}
-                label={"Invoice Amount (Without tax)"}
-                name="sg_delivery_challan_amount_without_gst"
-                mandatory={true}
-              />
-              <Input
-                type="number"
-                value={formData.sg_delivery_challan_amount_with_gst}
-                onChange={valueHandler}
-                label={"Invoice Amount (With tax)"}
-                name="sg_delivery_challan_amount_with_gst"
-                mandatory={true}
-              />
-              <span className="w-full flex gap-2 items-end">
-                <Input
-                  type="file"
-                  onChange={(e) => handleFile(e, "sg_delivery_challan_doc")}
-                  label={"Invoice Doc"}
-                />
-                {formData.sg_delivery_challan_doc &&
-                  formData.sg_delivery_challan_doc !== "" && (
-                    <FaEye
-                      size={15}
-                      className="cursor-pointer mb-3"
-                      onClick={() =>
-                        window.open(formData.sg_delivery_challan_doc, "__blank")
                       }
                     />
                   )}
