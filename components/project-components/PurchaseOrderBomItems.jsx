@@ -10,6 +10,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import Loading from "../Loading";
 import PurchaseOrderTable from "./PurchaseOrderTable";
 import ProjectItemTable from "./ProjectItemTable";
+import { useRouter } from "next/router";
 
 const AddVendor = dynamic(() => import("@/components/modals/AddVendor"));
 
@@ -22,6 +23,7 @@ const PurchaseOrderBomItems = ({
 }) => {
   const { vendors } = useVendors();
   const { openModal } = useModal();
+  const router = useRouter();
   const [formDetails, setFormDetails] = useState(bomItemDetails);
   const [itemList, setItemList] = useState(poItemList);
   const [errorRows, setErrorRows] = useState([]);
@@ -486,7 +488,7 @@ const PurchaseOrderBomItems = ({
           canAdd={true}
           toAddName={"Vendor"}
           onAddClick={() => {
-            openModal("add-vendor");
+            router.push("/masters/vendors/create-new-vendor");
           }}
         />
 
