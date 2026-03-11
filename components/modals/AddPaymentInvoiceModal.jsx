@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import FormModal from '../shared/FormModal';
 import Input from '../formPage/Input';
-import { addProjectPaymentInvoice, editProjectPaymentInvoice } from '@/services/api';
+import { addProjectPaymentInvoice, editProjectPaymentInvoice, getCompanyConfiguration } from '@/services/api';
 import { requestHandler } from '@/services/ApiHandler';
 import { useModal } from '@/contexts/modal';
 import { toast } from 'sonner';
@@ -14,6 +14,7 @@ const AddPaymentInvoiceModal = ({ modalId, projectId, onSuccessfullInvoiceSubmit
   const { closeModal } = useModal();
   const [isDocUploading, setIsDocUploading] = useState(false);
   const [editData, setEditData] = useState({});
+  const [companyName, setCompanyName] = useState('');
   const [paymentDetails, setPaymentDetails] = useState({
     project: projectId,
     invoice_amount_without_gst: '',
@@ -24,6 +25,15 @@ const AddPaymentInvoiceModal = ({ modalId, projectId, onSuccessfullInvoiceSubmit
     packing_list_no: '',
     remark: '',
   });
+
+  useEffect(() => {
+    requestHandler(
+      async () => await getCompanyConfiguration(),
+      null,
+      (data) => setCompanyName(data.data.output.company_name ?? ''),
+      () => { }
+    );
+  }, []);
 
   useEffect(() => {
     if (details) {
@@ -76,7 +86,7 @@ const AddPaymentInvoiceModal = ({ modalId, projectId, onSuccessfullInvoiceSubmit
       invoice_date: 'Invoice Date',
       invoice_amount_without_gst: 'Invoice Amount(Without GST)',
       invoice_amount_with_gst: 'Invoice Amount(With GST)',
-      invoice_doc: 'Invocie Doc',
+      invoice_doc: 'Invoice Doc',
     };
 
     const validationResult = checkSpecificKeys(paymentDetails, keysToCheck);
@@ -85,7 +95,7 @@ const AddPaymentInvoiceModal = ({ modalId, projectId, onSuccessfullInvoiceSubmit
       return;
     }
 
-    const postData = { ...paymentDetails, invoice_category: 'Ornate Agencies Pvt Ltd' };
+    const postData = { ...paymentDetails, invoice_category: companyName };
 
     if (modalId.split('-')[0] === 'add') {
       await requestHandler(
