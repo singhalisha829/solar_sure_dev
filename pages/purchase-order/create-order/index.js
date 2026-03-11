@@ -76,7 +76,6 @@ const CreateOrder = () => {
     shipper_email: projectDetails.site_details.poc_email,
     shipper_mobile_no: projectDetails.site_details.poc_contact,
   });
-  console.log('formDetails', formDetails);
 
   useEffect(() => {
     fetchCompanyConfig();
@@ -100,7 +99,6 @@ const CreateOrder = () => {
         const config = data.data.output;
         setCompanyConfig(config);
         const terms = config.purchase_order_terms_and_conditions ?? {};
-        console.log('terms', terms);
         setFormDetails(() => ({
           ...formDetails,
           payment_terms: terms.payment_terms ?? "",
