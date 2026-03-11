@@ -95,7 +95,7 @@ const routes = [
         icon: <MdPlaylistAddCheckCircle className="h-[20px] w-[20px]" />,
       },
       {
-        name: "Ornate Invoices",
+        name: "Invoices",
         path: "/invoices",
         icon: <FaFileInvoiceDollar className="h-[16px] w-[16px]" />,
       },
