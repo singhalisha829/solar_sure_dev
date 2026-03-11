@@ -21,7 +21,6 @@ const defaultForm = {
   state_name: "",
   city: "",
   address: "",
-  tds_deduction: "",
   poc_contact_person: "",
   poc_contact_email: "",
   poc_contact_no: "",
@@ -43,7 +42,6 @@ const AddTransporterModal = ({ modalId, itemDetails, onSuccess }) => {
         state_name: itemDetails.state_name ?? "",
         city: itemDetails.city ?? "",
         address: itemDetails.address ?? "",
-        tds_deduction: itemDetails.tds_deduction ?? "",
         poc_contact_person: itemDetails.transporter_poc_contact_person_name ?? "",
         poc_contact_email: itemDetails.transporter_poc_contact_person_email ?? "",
         poc_contact_no: itemDetails.transporter_poc_contact_person_phone ?? "",
@@ -101,7 +99,6 @@ const AddTransporterModal = ({ modalId, itemDetails, onSuccess }) => {
           state: form.state_name,
           city: Number(form.city),
           address: form.address,
-          tds_deduction: form.tds_deduction || "0",
         },
         transporter_poc: {
           contact_email: form.poc_contact_email,
@@ -129,7 +126,7 @@ const AddTransporterModal = ({ modalId, itemDetails, onSuccess }) => {
           state: form.state_name,
           city: Number(form.city),
           address: form.address,
-          tds_deduction: form.tds_deduction || "0",
+          tds_deduction: "1",
           status: "1",
         },
         transporter_poc: {
@@ -225,13 +222,6 @@ const AddTransporterModal = ({ modalId, itemDetails, onSuccess }) => {
           setselected={(value, id) => {
             setForm((prev) => ({ ...prev, city: id }));
           }}
-        />
-        <Input
-          type="text"
-          name="tds_deduction"
-          value={form.tds_deduction}
-          onChange={valueHandler}
-          label="TDS Deduction"
         />
         <Input
           mandatory
