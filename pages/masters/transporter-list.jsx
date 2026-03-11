@@ -8,8 +8,15 @@ import CustomPagination from "@/components/shared/Pagination";
 import Search from "@/components/shared/SearchComponent";
 import Button from "@/components/shared/Button";
 import { TABLE_SIZE } from "@/utils/constants";
+import { useModal } from "@/contexts/modal";
+import dynamic from "next/dynamic";
+
+const AddTransporterModal = dynamic(
+  () => import("@/components/modals/AddTransporterModal")
+);
 
 const TransportationList = () => {
+  const { openModal } = useModal();
   const [isLoading, setIsLoading] = useState([]);
   const [transportations, setTransportation] = useState([]);
   const [search, setSearch] = useState("");
@@ -22,6 +29,8 @@ const TransportationList = () => {
     page: 1,
     limit: TABLE_SIZE,
   });
+  const [selectedTransporter, setSelectedTransporter] = useState(null);
+  const [editModalId, setEditModalId] = useState(null);
 
   useEffect(() => {
     fetchTransportations({ page: 1, limit: TABLE_SIZE });
@@ -37,6 +46,13 @@ const TransportationList = () => {
       },
       toast.error
     );
+  };
+
+  const handleEditTransporter = (row) => {
+    const modalId = `edit-transporter-${row.id}`;
+    setSelectedTransporter(row);
+    setEditModalId(modalId);
+    openModal(modalId);
   };
 
   const tableHeader = [
@@ -82,6 +98,14 @@ const TransportationList = () => {
       width: "10rem",
       sortable: true,
       key: "created_at",
+    },
+    {
+      name: "Actions",
+      type: "actions-column",
+      actionType: "edit",
+      width: "6rem",
+      key: "actions",
+      onClickEdit: handleEditTransporter,
     },
   ];
 
@@ -131,6 +155,9 @@ const TransportationList = () => {
               Clear Filters
             </Button>
           )}
+          <Button className="px-3" onClick={() => openModal("add-transporter")}>
+            Add Transporter
+          </Button>
           <Search
             searchText={(data) => {
               setSearch(data);
@@ -172,6 +199,17 @@ const TransportationList = () => {
         </div>
       )}
       {isLoading && <Loading />}
+      <AddTransporterModal
+        modalId="add-transporter"
+        onSuccess={fetchTransportations}
+      />
+      {editModalId && (
+        <AddTransporterModal
+          modalId={editModalId}
+          itemDetails={selectedTransporter}
+          onSuccess={fetchTransportations}
+        />
+      )}
     </>
   );
 };

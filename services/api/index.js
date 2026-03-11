@@ -985,7 +985,21 @@ export const getSunlightTransporters = async (queryParams = {}) => {
   const response = await axiosInstance.get(buildUrl("api/logistics/get-transporter/", queryParams));
   return response;
 };
+export const createTransporter = async (data) => {
+  const response = await axiosInstance.post(`api/logistics/transporter/`, data);
+  return response;
+};
+
+export const editTransporter = async (id, data) => {
+  const response = await axiosInstance.put(`api/logistics/transporter/${id}/`, data);
+  return response;
+};
 // transporter details api ends here..
+
+export const getUsers = async (queryParams = {}) => {
+  const response = await axiosInstance.get(buildUrl("api/accounts/users/", queryParams));
+  return response;
+};
 
 //--------
 
