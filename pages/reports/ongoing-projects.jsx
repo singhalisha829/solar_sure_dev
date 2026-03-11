@@ -101,7 +101,7 @@ const OngoingProjects = () => {
       width: "240px",
     },
     {
-      name: "Total Ornate Invoice Amount(₹)",
+      name: "Total Invoice Amount(₹)",
       type: "gst-amount",
       key: "total_invoice_amount_till_date_with_gst",
       key2: "total_invoice_amount_till_date_without_gst",
@@ -129,7 +129,7 @@ const OngoingProjects = () => {
       width: "150px",
     },
     {
-      name: "Last Ornate Invoice Amount(₹)",
+      name: "Last Invoice Amount(₹)",
       type: "gst-amount",
       key: "last_invoice_amount_with_gst",
       key2: "last_invoice_amount_without_gst",
@@ -137,7 +137,7 @@ const OngoingProjects = () => {
       width: "240px",
     },
     {
-      name: "Last Ornate Invoice Date",
+      name: "Last Invoice Date",
       type: "date",
       key: "last_amount_invoice_date",
       sortable: true,
