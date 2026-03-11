@@ -6,7 +6,7 @@ import Button from "@/components/shared/Button";
 import { useProduct } from "@/contexts/product";
 import Input from "@/components/formPage/Input";
 import { dateFormatInYYYYMMDD } from "@/utils/formatter";
-import { createPackingList } from "@/services/api";
+import { createPackingList, getCompanyConfiguration } from "@/services/api";
 import { requestHandler } from "@/services/ApiHandler";
 import { toast } from "sonner";
 import { MdArrowForwardIos } from "react-icons/md";
@@ -22,6 +22,7 @@ const CreatePackingList = () => {
   const { vendors } = useVendors();
   const { units } = useProduct();
   const { getProjectDetailsHandler } = useProject();
+  const [companyName, setCompanyName] = useState("");
   const [sectionItemList, setSectionItemList] = useState([]);
   const [projectId, setProjectId] = useState(null);
   const [breadcrumbsText, setBreadcrumbsText] = useState(null);
@@ -87,6 +88,15 @@ const CreatePackingList = () => {
     useState(parentTableHeader);
 
   useEffect(() => {
+    requestHandler(
+      async () => await getCompanyConfiguration(),
+      null,
+      (data) => setCompanyName(data.data.output.company_name ?? ""),
+      () => {}
+    );
+  }, []);
+
+  useEffect(() => {
     const item_list = LocalStorageService.get("packing-list-items")?.bom_heads;
     if (Object.keys(item_list)?.length > 0) {
       let list = {},
@@ -144,7 +154,7 @@ const CreatePackingList = () => {
     }
 
     if (
-      formDetails.vendor_name !== "SolarSure" &&
+      formDetails.vendor_name !== companyName &&
       formDetails.po_number == ""
     ) {
       toast.error("Field PO Number is empty!");
@@ -231,7 +241,7 @@ const CreatePackingList = () => {
     let list = tableHeader;
     let parentList = parentTableHeader;
 
-    if (name !== "SolarSure") {
+    if (name !== companyName) {
       list.splice(6, 3);
       parentList.splice(4, 1);
     }
@@ -455,7 +465,7 @@ const CreatePackingList = () => {
                 outerClass={"w-[30rem]"}
                 value={formDetails.po_number}
                 mandatory={
-                  formDetails.vendor_name !== "SolarSure" ? true : false
+                  formDetails.vendor_name !== companyName ? true : false
                 }
                 onChange={(e) =>
                   setFormDetails({ ...formDetails, po_number: e.target.value })

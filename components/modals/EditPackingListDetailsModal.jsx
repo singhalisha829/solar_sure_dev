@@ -3,7 +3,7 @@ import FormModal from "../shared/FormModal";
 import Input from "../formPage/Input";
 import { useVendors } from "@/contexts/vendors";
 import { SelectForObjects } from "../formPage/MultiSelectDropdown/MultiSelectDropdown";
-import { editPackingListDetails } from "@/services/api";
+import { editPackingListDetails, getCompanyConfiguration } from "@/services/api";
 import { requestHandler } from "@/services/ApiHandler";
 import { toast } from "sonner";
 
@@ -16,7 +16,17 @@ const EditPackingListDetails = ({ details, onSuccessfullSubmit }) => {
   });
   const [editedData, setEditedData] = useState({});
   const [invalidItemsList, setInvalidItemsList] = useState([]);
+  const [companyName, setCompanyName] = useState("");
   const { vendors } = useVendors();
+
+  useEffect(() => {
+    requestHandler(
+      async () => await getCompanyConfiguration(),
+      null,
+      (data) => setCompanyName(data.data.output.company_name ?? ""),
+      () => {}
+    );
+  }, []);
 
   useEffect(() => {
     if (details && details !== null) {
@@ -31,7 +41,7 @@ const EditPackingListDetails = ({ details, onSuccessfullSubmit }) => {
     }
 
     if (
-      packingListDetails.vendor_name !== "Ornate Agencies Private Limited" &&
+      packingListDetails.vendor_name !== companyName &&
       packingListDetails.po_number == ""
     ) {
       toast.error("Field PO Number is empty!");
@@ -39,7 +49,7 @@ const EditPackingListDetails = ({ details, onSuccessfullSubmit }) => {
     }
     if (
       details.vendor != packingListDetails?.vendor &&
-      packingListDetails?.vendor_name === "Ornate Agencies Private Limited"
+      packingListDetails?.vendor_name === companyName
     ) {
       // check all items inventory
       let invalid_items = [];
@@ -141,7 +151,7 @@ const EditPackingListDetails = ({ details, onSuccessfullSubmit }) => {
           outerClass={"w-[30rem]"}
           value={packingListDetails.po_number}
           mandatory={
-            packingListDetails.vendor_name !== "SolarSure"
+            packingListDetails.vendor_name !== companyName
           }
           onChange={valueHandler}
           name="po_number"

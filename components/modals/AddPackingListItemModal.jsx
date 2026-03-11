@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import FormModal from "../shared/FormModal";
 import ProcurementTable from "../project-components/ProcurementTable";
+import { getCompanyConfiguration } from "@/services/api";
+import { requestHandler } from "@/services/ApiHandler";
 
 const AddPackingListItem = ({
   modalId,
@@ -9,7 +11,6 @@ const AddPackingListItem = ({
   vendorName,
   addedItemList,
 }) => {
-  console.log('itemList', itemList);
   const [unpackedItems, setUnpackedItems] = useState([]);
   const tableHeader = [
     { name: "Item Code", width: "7rem", key: "product_code" },
@@ -62,9 +63,19 @@ const AddPackingListItem = ({
     { name: "", colSpan: 1 },
   ];
 
+  const [companyName, setCompanyName] = useState("");
   const [tableHeaderList, setTableHeaderList] = useState(tableHeader);
   const [parentTableHeaderList, setParentTableHeaderList] =
     useState(parentTableHeader);
+
+  useEffect(() => {
+    requestHandler(
+      async () => await getCompanyConfiguration(),
+      null,
+      (data) => setCompanyName(data.data.output.company_name ?? ""),
+      () => {}
+    );
+  }, []);
 
   useEffect(() => {
     if (itemList.length > 0) {
@@ -82,7 +93,6 @@ const AddPackingListItem = ({
             },
             []
           );
-          console.log('combinedBomHeads', combinedBomHeads, addedItemList);
           let new_list = [];
           combinedBomHeads.map((item) => {
             if (addedItemList.includes(item.item)) return;
@@ -95,7 +105,6 @@ const AddPackingListItem = ({
       });
 
       setUnpackedItems(list);
-      console.log('list', list);
     }
   }, []);
 
@@ -109,7 +118,7 @@ const AddPackingListItem = ({
     let list = [...tableHeader];
     let parentList = [...parentTableHeader];
 
-    if (name !== "Ornate Agencies Private Limited") {
+    if (name !== companyName) {
       list.splice(6, 3);
       parentList.splice(4, 1);
     }

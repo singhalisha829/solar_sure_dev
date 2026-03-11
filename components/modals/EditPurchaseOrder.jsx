@@ -3,7 +3,7 @@ import FormModal from "../shared/FormModal";
 import Input from "../formPage/Input";
 import { useVendors } from "@/contexts/vendors";
 import { SelectForObjects } from "../formPage/MultiSelectDropdown/MultiSelectDropdown";
-import { editPurchaseOrder } from "@/services/api";
+import { editPurchaseOrder, getCompanyConfiguration } from "@/services/api";
 import { requestHandler } from "@/services/ApiHandler";
 import { toast } from "sonner";
 import { useStateCity } from "@/contexts/state_city";
@@ -23,6 +23,16 @@ const EditPurchaseOrderDetails = ({
   const [purchaseOrderDetails, setPurchaseOrderDetails] = useState({});
   const [editedData, setEditedData] = useState({});
   const [invalidItemsList, setInvalidItemsList] = useState([]);
+  const [companyConfig, setCompanyConfig] = useState(null);
+
+  useEffect(() => {
+    requestHandler(
+      async () => await getCompanyConfiguration(),
+      null,
+      (data) => setCompanyConfig(data.data.output),
+      () => {}
+    );
+  }, []);
 
   useEffect(() => {
     if (details && details !== null) {
@@ -39,9 +49,13 @@ const EditPurchaseOrderDetails = ({
     }
   }, [details]);
 
+  const warehouseLabel = companyConfig?.company_name
+    ? `${companyConfig.company_name} Warehouse`
+    : "Warehouse";
+
   const shippingAddressList = [
     { name: "Project Site" },
-    { name: "Ornate Warehouse" },
+    { name: warehouseLabel },
     { name: "Other" },
   ];
 
@@ -52,7 +66,7 @@ const EditPurchaseOrderDetails = ({
     }
 
     if (
-      purchaseOrderDetails.vendor_name !== "Ornate Agencies Private Limited" &&
+      purchaseOrderDetails.vendor_name !== companyConfig?.company_name &&
       purchaseOrderDetails.po_number == ""
     ) {
       toast.error("Field PO Number is empty!");
@@ -60,7 +74,7 @@ const EditPurchaseOrderDetails = ({
     }
     if (
       details.vendor != purchaseOrderDetails?.vendor &&
-      purchaseOrderDetails?.vendor_name === "Ornate Agencies Private Limited"
+      purchaseOrderDetails?.vendor_name === companyConfig?.company_name
     ) {
       // check all items inventory
       let invalid_items = [];
@@ -148,17 +162,17 @@ const EditPurchaseOrderDetails = ({
         shipper_email: "",
         shipper_mobile_no: "",
       };
-    } else if (name === "Ornate Warehouse") {
+    } else if (name === warehouseLabel) {
       shipperData = {
         shipper_type: name,
-        shipper_name: "",
-        shipper_address: "A 87, Okhla Phase -II,",
-        shipper_city: "2",
-        shipper_city_name: "Delhi",
-        shipper_state: "60",
-        shipper_state_name: "Delhi",
-        shipper_pincode: "110020",
-        shipper_gst: "07AAACO2237Q1Z6",
+        shipper_name: companyConfig?.company_name ?? "",
+        shipper_address: companyConfig?.company_warehouse_address ?? "",
+        shipper_city: companyConfig?.city_id ? String(companyConfig.city_id) : "",
+        shipper_city_name: companyConfig?.city_name ?? "",
+        shipper_state: companyConfig?.state_id ? String(companyConfig.state_id) : "",
+        shipper_state_name: companyConfig?.state_name ?? "",
+        shipper_pincode: companyConfig?.company_pincode ?? "",
+        shipper_gst: companyConfig?.company_gstin ?? "",
         shipper_contact_person_name: "",
         shipper_email: "",
         shipper_mobile_no: "",
