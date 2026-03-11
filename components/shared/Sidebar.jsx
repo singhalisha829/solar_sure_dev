@@ -106,28 +106,28 @@ const routes = [
       },
     ],
   },
-  {
-    name: "Reports",
-    path: "",
-    icon: <BiSolidReport className="h-[18px] w-[18px]" />,
-    subMenu: [
-      {
-        name: "Ongoing Projects",
-        path: "/reports/ongoing-projects",
-        icon: <BsBuildingFill className="h-[14px] w-[14px]" />,
-      },
-      {
-        name: "Payment Tracking",
-        path: "/reports/payment-tracking",
-        icon: <FaMoneyCheckAlt className="h-[14px] w-[14px]" />,
-      },
-      {
-        name: "Project Report",
-        path: "/reports/project-report",
-        icon: <BiSolidReport className="h-[14px] w-[14px]" />,
-      },
-    ],
-  },
+  // {
+  //   name: "Reports",
+  //   path: "",
+  //   icon: <BiSolidReport className="h-[18px] w-[18px]" />,
+  //   subMenu: [
+  //     {
+  //       name: "Ongoing Projects",
+  //       path: "/reports/ongoing-projects",
+  //       icon: <BsBuildingFill className="h-[14px] w-[14px]" />,
+  //     },
+  //     {
+  //       name: "Payment Tracking",
+  //       path: "/reports/payment-tracking",
+  //       icon: <FaMoneyCheckAlt className="h-[14px] w-[14px]" />,
+  //     },
+  //     {
+  //       name: "Project Report",
+  //       path: "/reports/project-report",
+  //       icon: <BiSolidReport className="h-[14px] w-[14px]" />,
+  //     },
+  //   ],
+  // },
   {
     name: "Master",
     path: "",
