@@ -10,7 +10,7 @@ import { useProject } from "@/contexts/project";
 import File from "@/components/File";
 import { handleFileUpload } from "@/utils/documentUploadHandler";
 import {
-  getEmployeeList,
+  getUsers,
   getProjectSites,
   addSiteVisits,
 } from "@/services/api";
@@ -105,9 +105,9 @@ const AddSiteVisit = () => {
 
   const fetchEmployees = async () => {
     await requestHandler(
-      async () => await getEmployeeList(),
+      async () => await getUsers(),
       null,
-      (data) => setEmployeeList(data.data.output),
+      (data) => setEmployeeList(data.data.output ?? data.data.results ?? []),
       toast.error
     );
   };

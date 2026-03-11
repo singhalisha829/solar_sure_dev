@@ -60,20 +60,21 @@ export const requestHandler = async (api, setLoading, onSuccess, onError) => {
       }
     }
   } catch (error) {
+    console.log('error', error);
     // Handle error cases, including unauthorized and forbidden cases
-    if ([401, 403].includes(error?.response?.status)) {
-      localStorage.clear(); // Clear local storage on authentication issues
-      if (isBrowser) window.location.href = "/login"; // Redirect to login page
-      onError(
-        error?.response?.data?.status.description || "Something went wrong"
-      );
-    } else {
-      onError(
-        error?.response?.data?.message ||
-        error?.message ||
-        "Something went wrong"
-      );
-    }
+    // if ([401, 403].includes(error?.response?.status)) {
+    //   localStorage.clear(); // Clear local storage on authentication issues
+    //   if (isBrowser) window.location.href = "/login"; // Redirect to login page
+    //   onError(
+    //     error?.response?.data?.status.description || "Something went wrong"
+    //   );
+    // } else {
+    //   onError(
+    //     error?.response?.data?.message ||
+    //     error?.message ||
+    //     "Something went wrong"
+    //   );
+    // }
   } finally {
     // Hide loading state if setLoading function is provided
     setLoading && setLoading(false);

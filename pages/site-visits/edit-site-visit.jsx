@@ -9,7 +9,7 @@ import { LocalStorageService } from "@/services/LocalStorageHandler";
 import { requestHandler } from "@/services/ApiHandler";
 import { toast } from "sonner";
 import {
-  getEmployeeList,
+  getUsers,
   getProjectSites,
   editSiteVisit,
   addSiteExpense,
@@ -120,9 +120,9 @@ const EditSiteVisit = () => {
 
   const fetchEmployees = async () => {
     await requestHandler(
-      async () => await getEmployeeList(),
+      async () => await getUsers(),
       null,
-      (data) => setEmployeeList(data.data.output),
+      (data) => setEmployeeList(data.data.output ?? data.data.results ?? []),
       toast.error
     );
   };
