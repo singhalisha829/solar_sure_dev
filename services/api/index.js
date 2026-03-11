@@ -1011,6 +1011,11 @@ export const editUser = async (id, data) => {
   return response;
 };
 
+export const adminResetPassword = async (data) => {
+  const response = await axiosInstance.put("api/accounts/admin-reset-password/", data);
+  return response;
+};
+
 //--------
 
 // contigency api starts here..

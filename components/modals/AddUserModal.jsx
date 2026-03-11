@@ -172,19 +172,20 @@ const AddUserModal = ({ modalId, itemDetails, onSuccess }) => {
           onChange={valueHandler}
           label="Phone"
         />
-        <div className="flex flex-col gap-1">
-          <Input
-            mandatory={!isEdit}
-            type="text"
-            name="password"
-            value={form.password}
-            onChange={valueHandler}
-            label="Password"
-          />
-          <p className="text-xs text-gray-400">
-            Min. 8 characters. Must not be too similar to the email address.
-          </p>
-        </div>
+        {!isEdit && (
+          <div className="flex flex-col gap-1">
+            <Input
+              mandatory={!isEdit}
+              type="text"
+              name="password"
+              value={form.password}
+              onChange={valueHandler}
+              label="Password"
+            />
+            <p className="text-xs text-gray-400">
+              Min. 8 characters. Must not be too similar to the email address.
+            </p>
+          </div>)}
         <Input
           mandatory
           type="date"

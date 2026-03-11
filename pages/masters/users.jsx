@@ -10,8 +10,10 @@ import Button from "@/components/shared/Button";
 import { TABLE_SIZE } from "@/utils/constants";
 import { useModal } from "@/contexts/modal";
 import dynamic from "next/dynamic";
+import { FaPen, FaKey } from "react-icons/fa";
 
 const AddUserModal = dynamic(() => import("@/components/modals/AddUserModal"));
+const ResetPasswordModal = dynamic(() => import("@/components/modals/ResetPasswordModal"));
 
 const Users = () => {
   const { openModal } = useModal();
@@ -23,6 +25,8 @@ const Users = () => {
   const [filters, setFilters] = useState({ page: 1, limit: TABLE_SIZE });
   const [selectedUser, setSelectedUser] = useState(null);
   const [editModalId, setEditModalId] = useState(null);
+  const [resetModalId, setResetModalId] = useState(null);
+  const [actionMenuUser, setActionMenuUser] = useState(null);
 
   useEffect(() => {
     fetchUsers({ page: 1, limit: TABLE_SIZE });
@@ -40,10 +44,23 @@ const Users = () => {
     );
   };
 
-  const handleEditUser = (row) => {
-    const modalId = `edit-user-${row.id}`;
-    setSelectedUser(row);
+  const handleActionClick = (row) => {
+    setActionMenuUser(row);
+  };
+
+  const handleEditUser = () => {
+    const modalId = `edit-user-${actionMenuUser.id}`;
+    setSelectedUser(actionMenuUser);
     setEditModalId(modalId);
+    setActionMenuUser(null);
+    openModal(modalId);
+  };
+
+  const handleResetPassword = () => {
+    const modalId = `reset-password-${actionMenuUser.id}`;
+    setSelectedUser(actionMenuUser);
+    setResetModalId(modalId);
+    setActionMenuUser(null);
     openModal(modalId);
   };
 
@@ -84,7 +101,7 @@ const Users = () => {
       actionType: "edit",
       width: "6rem",
       key: "actions",
-      onClickEdit: handleEditUser,
+      onClickEdit: handleActionClick,
     },
   ];
 
@@ -166,6 +183,39 @@ const Users = () => {
         </div>
       )}
       {isLoading && <Loading />}
+
+      {/* Action picker overlay */}
+      {actionMenuUser && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-[#2d3e5080] z-40"
+          onClick={() => setActionMenuUser(null)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-lg p-6 z-50 flex flex-col gap-3 w-80"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-zinc-800 text-base font-semibold border-l-2 border-secondary pl-3">
+              Choose Action - {actionMenuUser.first_name} {actionMenuUser.last_name}
+            </h3>
+
+            <button
+              className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-zinc-700 hover:bg-primary/10 hover:text-primary transition-colors text-left"
+              onClick={handleEditUser}
+            >
+              <FaPen size={13} />
+              Edit User Details
+            </button>
+            <button
+              className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-zinc-700 hover:bg-primary/10 hover:text-primary transition-colors text-left"
+              onClick={handleResetPassword}
+            >
+              <FaKey size={13} />
+              Reset Password
+            </button>
+          </div>
+        </div>
+      )}
+
       <AddUserModal
         modalId="add-user"
         onSuccess={() => fetchUsers({ page: 1, limit: TABLE_SIZE })}
@@ -173,6 +223,13 @@ const Users = () => {
       {editModalId && (
         <AddUserModal
           modalId={editModalId}
+          itemDetails={selectedUser}
+          onSuccess={() => fetchUsers({ ...filters, ...(search !== "" && { search }) })}
+        />
+      )}
+      {resetModalId && (
+        <ResetPasswordModal
+          modalId={resetModalId}
           itemDetails={selectedUser}
           onSuccess={() => fetchUsers({ ...filters, ...(search !== "" && { search }) })}
         />
