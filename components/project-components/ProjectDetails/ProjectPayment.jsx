@@ -45,12 +45,11 @@ const ProjectPayment = ({ projectBudget }) => {
   const [selectedPaymentRow, setSelectedPaymentRow] = useState(null);
   const [selectedInvoiceRow, setSelectedInvoiceRow] = useState(null);
   const [ornateInvoices, setOrnateInvoices] = useState([]);
-  const [sgInvoices, setSgInvoices] = useState([]);
   const [paymentTerms, setPaymentTerms] = useState([]);
   const [selectedPaymentTermRow, setSelectedPaymentTermRow] = useState(null);
   const [selectedRowForDelete, setSelectedRowForDelete] = useState(null);
 
-  const tabs = ["Payment", "Ornate Invoice", "SG Invoice", "Payment Terms"];
+  const tabs = ["Payment", "Invoice", "Payment Terms"];
 
   // const pendingAmount =
   //   Number(paymentAmountDetails?.total_invoice_amount || 0) -
@@ -107,16 +106,9 @@ const ProjectPayment = ({ projectBudget }) => {
       null,
       async (data) => {
         if (data.data.output && data.data.output.length > 0) {
-          const filteredOrnateInvoices = data.data.output.filter(
-            (invoice) => invoice.invoice_category === "Ornate Agencies Pvt Ltd"
-          );
-
-          const filteredSgInvoices = data.data.output.filter(
-            (invoice) => invoice.invoice_category === "SG Ornate Solar Pvt Ltd"
-          );
+          const filteredOrnateInvoices = data.data.output;
 
           setOrnateInvoices(filteredOrnateInvoices);
-          setSgInvoices(filteredSgInvoices);
         }
         setPaymentInvoiceDetails(data.data.output);
         setPaymentAmountDetails(data.total_amount);
@@ -158,17 +150,17 @@ const ProjectPayment = ({ projectBudget }) => {
     // Conditionally add the "Actions" column
     ...(accessibilityInfo?.edit_view || accessibilityInfo?.delete_view
       ? [
-          {
-            name: "Actions",
-            type: "actions-column",
-            actionType: allowedActions,
-            onClickEdit: (row) => {
-              setSelectedPaymentRow(row);
-              openModal(`edit-${activeTab.toLowerCase()}`);
-            },
-            onClickDelete: (row) => handleDeletePayment(row.id, "Payment"),
+        {
+          name: "Actions",
+          type: "actions-column",
+          actionType: allowedActions,
+          onClickEdit: (row) => {
+            setSelectedPaymentRow(row);
+            openModal(`edit-${activeTab.toLowerCase()}`);
           },
-        ]
+          onClickDelete: (row) => handleDeletePayment(row.id, "Payment"),
+        },
+      ]
       : []),
   ];
 
@@ -201,17 +193,17 @@ const ProjectPayment = ({ projectBudget }) => {
     // Conditionally add the "Actions" column
     ...(accessibilityInfo?.edit_view || accessibilityInfo?.delete_view
       ? [
-          {
-            name: "Actions",
-            type: "actions-column",
-            actionType: allowedActions,
-            onClickEdit: (row) => {
-              setSelectedInvoiceRow(row);
-              openModal(`edit-invoice`);
-            },
-            onClickDelete: (row) => handleDeletePayment(row.id, "Invoice"),
+        {
+          name: "Actions",
+          type: "actions-column",
+          actionType: allowedActions,
+          onClickEdit: (row) => {
+            setSelectedInvoiceRow(row);
+            openModal(`edit-invoice`);
           },
-        ]
+          onClickDelete: (row) => handleDeletePayment(row.id, "Invoice"),
+        },
+      ]
       : []),
   ];
 
@@ -246,16 +238,16 @@ const ProjectPayment = ({ projectBudget }) => {
     // Conditionally add the "Actions" column
     ...(accessibilityInfo?.edit_view
       ? [
-          {
-            name: "Actions",
-            type: "actions-column",
-            actionType: "edit",
-            onClickEdit: (row) => {
-              setSelectedPaymentTermRow(row);
-              openModal("edit-payment-terms");
-            },
+        {
+          name: "Actions",
+          type: "actions-column",
+          actionType: "edit",
+          onClickEdit: (row) => {
+            setSelectedPaymentTermRow(row);
+            openModal("edit-payment-terms");
           },
-        ]
+        },
+      ]
       : []),
   ];
 
@@ -375,11 +367,10 @@ const ProjectPayment = ({ projectBudget }) => {
             onClick={() => {
               setActiveTab(tab);
             }}
-            className={`mr-4 flex px-4 py-1  ${
-              activeTab === tab
-                ? "border-b-2 border-b-primary text-primary  "
-                : "border-transparent"
-            } focus:outline-none`}
+            className={`mr-4 flex px-4 py-1  ${activeTab === tab
+              ? "border-b-2 border-b-primary text-primary  "
+              : "border-transparent"
+              } focus:outline-none`}
           >
             {tab}
           </button>
@@ -413,7 +404,7 @@ const ProjectPayment = ({ projectBudget }) => {
         </>
       )}
 
-      {activeTab === "Ornate Invoice" && (
+      {activeTab === "Invoice" && (
         <>
           {paymentInvoiceDetails && (
             <div className="overflow-x-auto">
@@ -421,22 +412,7 @@ const ProjectPayment = ({ projectBudget }) => {
             </div>
           )}
           <AddEditInvoice
-            modalId="add-ornate-invoice"
-            projectId={projectId}
-            onSuccessfullInvoiceSubmit={fetchProjectPaymentInvoiceDetails}
-          />
-        </>
-      )}
-
-      {activeTab === "SG Invoice" && (
-        <>
-          {paymentInvoiceDetails && (
-            <div className="overflow-x-auto">
-              <Table rows={sgInvoices} columns={invoiceTableHeader} />
-            </div>
-          )}
-          <AddSgEditInvoice
-            modalId="add-sg-invoice"
+            modalId="add-invoice"
             projectId={projectId}
             onSuccessfullInvoiceSubmit={fetchProjectPaymentInvoiceDetails}
           />
