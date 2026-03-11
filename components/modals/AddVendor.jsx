@@ -33,7 +33,7 @@ const AddVendor = ({
     state: "",
     pincode: "",
     gst: "",
-    pan: "",
+    // pan: "",
   });
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const AddVendor = ({
       pincode: "Pincode",
       state: "State",
       city: "City",
-      pan: "Pan",
+      // pan: "Pan",
       address: "Address",
     };
     const validationResult = checkSpecificKeys(vendor, keysToCheck);
@@ -221,14 +221,14 @@ const AddVendor = ({
           placeholder="Select City"
           dropdownLabel={"Select City"}
         />
-        <Input
+        {/* <Input
           type={"text"}
           mandatory={true}
           onChange={valueHandler}
           value={vendor.pan}
           name={"pan"}
-          label={"PanS Number"}
-        />
+          label={"Pan Number"}
+        /> */}
         <Input
           mandatory={true}
           outerClass="col-span-2"
