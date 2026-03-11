@@ -121,7 +121,7 @@ const ProjectsPage = () => {
         { name: "Inroof" },
         { name: "Skin Roof" },
         { name: "Conventional" },
-        { name: "Ground mounted-Ornate" },
+        { name: "Ground mounted" },
         { name: "⁠Tracker(GM-SG)" },
         { name: "BESS" },
       ],
