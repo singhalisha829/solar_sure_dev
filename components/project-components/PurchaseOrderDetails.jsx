@@ -14,6 +14,7 @@ import Loading from "../Loading";
 
 const PurchaseOrderDetails = ({
   bomItemDetails,
+  companyConfig,
   onSubmitHandler,
   onBackClick,
   isLoading,
@@ -21,9 +22,13 @@ const PurchaseOrderDetails = ({
   const { states, city, getCityHandler } = useStateCity();
   const [formDetails, setFormDetails] = useState(bomItemDetails);
 
+  const warehouseLabel = companyConfig?.company_name
+    ? `${companyConfig.company_name} Warehouse`
+    : "Warehouse";
+
   const shippingAddressList = [
     { name: "Project Site" },
-    { name: "Ornate Warehouse" },
+    { name: warehouseLabel },
     { name: "Other" },
   ];
 
@@ -80,21 +85,21 @@ const PurchaseOrderDetails = ({
         shipper_email: "",
         shipper_mobile_no: "",
       });
-    } else if (name === "Ornate Warehouse") {
+    } else if (name === warehouseLabel) {
       setFormDetails({
         ...formDetails,
         shipper_type: name,
-        shipper_name: "",
-        shipper_address: "A 87, Okhla Phase -II,",
-        shipper_city: "2",
-        shipper_city_name: "Delhi",
-        shipper_state: "60",
-        shipper_state_name: "Delhi",
-        shipper_pincode: "110020",
-        shipper_gst: "07AAACO2237Q1Z6",
-        shipper_contact_person_name: "",
-        shipper_email: "",
-        shipper_mobile_no: "",
+        shipper_name: companyConfig?.company_name ?? "",
+        shipper_address: companyConfig?.company_warehouse_address ?? "",
+        shipper_city: companyConfig?.city_id ? String(companyConfig.city_id) : "",
+        shipper_city_name: companyConfig?.city_name ?? "",
+        shipper_state: companyConfig?.state_id ? String(companyConfig.state_id) : "",
+        shipper_state_name: companyConfig?.state_name ?? "",
+        shipper_pincode: companyConfig?.company_pincode ?? '',
+        shipper_gst: companyConfig?.company_gstin ?? "",
+        shipper_contact_person_name: companyConfig?.company_point_of_contact ?? '',
+        shipper_email: companyConfig?.company_point_of_contact_email ?? '',
+        shipper_mobile_no: companyConfig?.company_point_of_contact_phone ?? "",
       });
     }
   };

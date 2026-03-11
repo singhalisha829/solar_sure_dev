@@ -128,15 +128,6 @@ const CreatePackingList = () => {
       setBreadcrumbsText(
         LocalStorageService.get("packing-list-items")?.project_details
       );
-
-      // set vendor default value as ornate
-      setFormDetails({
-        ...formDetails,
-        vendor_name: "Ornate Agencies Private Limited",
-        vendor: vendors.find(
-          (e) => e.name === "Ornate Agencies Private Limited"
-        )?.id,
-      });
     }
   }, []);
 
@@ -153,7 +144,7 @@ const CreatePackingList = () => {
     }
 
     if (
-      formDetails.vendor_name !== "Ornate Agencies Private Limited" &&
+      formDetails.vendor_name !== "SolarSure" &&
       formDetails.po_number == ""
     ) {
       toast.error("Field PO Number is empty!");
@@ -240,7 +231,7 @@ const CreatePackingList = () => {
     let list = tableHeader;
     let parentList = parentTableHeader;
 
-    if (name !== "Ornate Agencies Private Limited") {
+    if (name !== "SolarSure") {
       list.splice(6, 3);
       parentList.splice(4, 1);
     }
@@ -464,7 +455,7 @@ const CreatePackingList = () => {
                 outerClass={"w-[30rem]"}
                 value={formDetails.po_number}
                 mandatory={
-                  formDetails.vendor_name !== "Ornate Agencies Private Limited"
+                  formDetails.vendor_name !== "SolarSure" ? true : false
                 }
                 onChange={(e) =>
                   setFormDetails({ ...formDetails, po_number: e.target.value })

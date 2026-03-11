@@ -6,6 +6,7 @@ import {
   addPurchaseOrder,
   getPurchaserList,
   getPurchaseOrderItemListForOthers,
+  getCompanyConfiguration,
 } from "@/services/api";
 import { requestHandler } from "@/services/ApiHandler";
 import { toast } from "sonner";
@@ -25,18 +26,6 @@ const PurchaseOrderCostEstimation = dynamic(
   () => import("@/components/project-components/PurchaseOrderCostEstimation")
 );
 
-const otherTerms = `1.Our purchase order Number and Item Code must appear against description in your Invoice/Bill and a copy of this purchase
-order must also be attached with your Invoice/Bill.
-2.Tax invoice to accompany material for every supply. Material will not be accepted on a challan.
-3.Material shipped should not exceed the ordered quantity. Excess quantity will have to be lifted back at your expense from the
-place of delivery.
-4.No TCS to be added to the value of goods supplied in tax invoice raised by the seller.
-5.TDS under Section 194Q @0.1% will be deducted by the company if total purchases in the financial year exceed ₹50 lakhs.
-6.The vendor must provide their ESI registration number when billing services to the company. If the vendor fails to provide the
-ESI registration number, 4% of the service value will be deducted from the payment, which will be accounted for as an ESI
-contribution by the company on behalf of the non-ESI-registered vendor.
-7.This purchase order is system-generated and does not require a stamp or signature.
-8.E&OE`;
 
 const CreateOrder = () => {
   const router = useRouter();
@@ -47,6 +36,7 @@ const CreateOrder = () => {
   const [purchasers, setPurchasers] = useState([]);
   const [isExtraChargeAdded, setIsExtraChargeAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [companyConfig, setCompanyConfig] = useState(null);
   const [formSteps, setFormSteps] = useState([
     { title: "Project Items", onClick: () => setCurrentStep(0) },
     { title: "Purchase Order Details", onClick: () => setCurrentStep(2) },
@@ -54,7 +44,7 @@ const CreateOrder = () => {
 
   const [formDetails, setFormDetails] = useState({
     project: projectDetails.id,
-    other_terms: otherTerms,
+    other_terms: "",
     purchase_order_date: dateFormatInYYYYMMDD(today),
     vendor: "",
     vendor_name: "",
@@ -64,9 +54,8 @@ const CreateOrder = () => {
     total_po_taxable_amount: "",
     total_po_tax_amount: "",
     extra_charges: [],
-    payment_terms: "15 days from date of supply of goods",
-    delivery_terms:
-      "Delivery at Place (DAP), as specified in the delivery address stated in this purchase order.",
+    payment_terms: "",
+    delivery_terms: "",
     remark: "",
     purchaser: "",
     purchaser_name: "",
@@ -87,8 +76,10 @@ const CreateOrder = () => {
     shipper_email: projectDetails.site_details.poc_email,
     shipper_mobile_no: projectDetails.site_details.poc_contact,
   });
+  console.log('formDetails', formDetails);
 
   useEffect(() => {
+    fetchCompanyConfig();
     if (projectDetails.id !== "") {
       if (
         ["Installation", "Freight", "Other"].includes(projectDetails.section)
@@ -100,6 +91,26 @@ const CreateOrder = () => {
       fetchPurchasers();
     }
   }, []);
+
+  const fetchCompanyConfig = async () => {
+    await requestHandler(
+      async () => await getCompanyConfiguration(),
+      null,
+      (data) => {
+        const config = data.data.output;
+        setCompanyConfig(config);
+        const terms = config.purchase_order_terms_and_conditions ?? {};
+        console.log('terms', terms);
+        setFormDetails(() => ({
+          ...formDetails,
+          payment_terms: terms.payment_terms ?? "",
+          delivery_terms: terms.delivery_terms ?? "",
+          other_terms: terms.other_terms ?? "",
+        }));
+      },
+      () => { }
+    );
+  };
 
   const fetchPurchasers = async () => {
     await requestHandler(
@@ -162,9 +173,16 @@ const CreateOrder = () => {
     );
   };
 
+  const preserveTerms = (data) => ({
+    ...data,
+    payment_terms: formDetails.payment_terms,
+    delivery_terms: formDetails.delivery_terms,
+    other_terms: formDetails.other_terms,
+  });
+
   const onNextClick = (data, itemList, willAddExtraCharge, is_draft = false) => {
     if (is_draft) {
-      handleFormSubmit(data, true)
+      handleFormSubmit(preserveTerms(data), true)
       return;
     };
 
@@ -179,7 +197,7 @@ const CreateOrder = () => {
       ]);
       if (formDetails.extra_charges?.length === 0) {
         setFormDetails({
-          ...data,
+          ...preserveTerms(data),
           extra_charges: [
             {
               charges: "",
@@ -192,17 +210,17 @@ const CreateOrder = () => {
           ],
         });
       } else {
-        setFormDetails(data);
+        setFormDetails(preserveTerms(data));
       }
 
       setIsExtraChargeAdded(true);
       setCurrentStep(1);
     } else if (formDetails.extra_charges?.length > 0) {
       setCurrentStep(1);
-      setFormDetails(data);
+      setFormDetails(preserveTerms(data));
     } else {
       setCurrentStep(2);
-      setFormDetails(data);
+      setFormDetails(preserveTerms(data));
     }
     setPoItemList(itemList);
 
@@ -358,6 +376,7 @@ const CreateOrder = () => {
         {currentStep === 2 && (
           <PurchaseOrderDetails
             bomItemDetails={formDetails}
+            companyConfig={companyConfig}
             onBackClick={() =>
               isExtraChargeAdded ? setCurrentStep(1) : setCurrentStep(0)
             }

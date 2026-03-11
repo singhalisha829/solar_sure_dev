@@ -141,7 +141,7 @@ const EditPackingListDetails = ({ details, onSuccessfullSubmit }) => {
           outerClass={"w-[30rem]"}
           value={packingListDetails.po_number}
           mandatory={
-            packingListDetails.vendor_name !== "Ornate Agencies Private Limited"
+            packingListDetails.vendor_name !== "SolarSure"
           }
           onChange={valueHandler}
           name="po_number"

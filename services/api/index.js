@@ -1016,6 +1016,11 @@ export const adminResetPassword = async (data) => {
   return response;
 };
 
+export const getCompanyConfiguration = async () => {
+  const response = await axiosInstance.get("api/project/company-configuration/");
+  return response;
+};
+
 //--------
 
 // contigency api starts here..

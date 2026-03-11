@@ -9,6 +9,7 @@ const AddPackingListItem = ({
   vendorName,
   addedItemList,
 }) => {
+  console.log('itemList', itemList);
   const [unpackedItems, setUnpackedItems] = useState([]);
   const tableHeader = [
     { name: "Item Code", width: "7rem", key: "product_code" },
@@ -81,6 +82,7 @@ const AddPackingListItem = ({
             },
             []
           );
+          console.log('combinedBomHeads', combinedBomHeads, addedItemList);
           let new_list = [];
           combinedBomHeads.map((item) => {
             if (addedItemList.includes(item.item)) return;
@@ -93,6 +95,7 @@ const AddPackingListItem = ({
       });
 
       setUnpackedItems(list);
+      console.log('list', list);
     }
   }, []);
 

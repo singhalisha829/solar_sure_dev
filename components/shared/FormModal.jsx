@@ -32,15 +32,14 @@ const FormModal = ({
     >
       <form
         onClick={(e) => e.stopPropagation()}
-        className={`relative ${width} flex-col p-[30px] gap-5 bg-white max-h-[600px] rounded-2xl ${z_index} ${
-          hide ? "hidden" : "flex"
-        } overflow-auto ${className}`}
+        className={`relative ${width} flex-col p-[30px] gap-5 bg-white max-h-[600px] rounded-2xl ${z_index} ${hide ? "hidden" : "flex"
+          } overflow-auto ${className}`}
       >
         <div
           className={`sticky top-0 bg-white w-full z-[${parseInt(z_index.match(/\d+/)) + 50}]`}
         >
           <div className="flex items-center justify-between">
-            <h3 className="text-zinc-800 text-lg font-semibold capitalize pl-4 border-l-2 border-orange-500 flex items-center">
+            <h3 className="text-zinc-800 text-lg font-semibold capitalize pl-4 border-l-2 border-secondary flex items-center">
               {heading}
             </h3>
             <button
@@ -49,9 +48,9 @@ const FormModal = ({
               onClick={
                 onClose
                   ? () => {
-                      onClose();
-                      closeModal(id);
-                    }
+                    onClose();
+                    closeModal(id);
+                  }
                   : () => closeModal(id)
               }
             >
@@ -66,9 +65,9 @@ const FormModal = ({
             onClick={
               onClose
                 ? () => {
-                    onClose();
-                    closeModal(id);
-                  }
+                  onClose();
+                  closeModal(id);
+                }
                 : () => closeModal(id)
             }
             className={"flex gap-2 items-center justify-center"}
