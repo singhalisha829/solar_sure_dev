@@ -56,7 +56,7 @@ export default function App({ Component, pageProps }) {
           <section className="h-screen grow basis-[85%] overflow-scroll rounded-2xl px-4 md:px-8 py-5 flex flex-col gap-5  print:h-fit">
             <Component {...pageProps} />
           </section>
-          <Toaster richColors position="top-right" />
+          <Toaster richColors position="top-right" duration={2000} closeButton />
         </ModalProvider>
       </main>
     );
@@ -71,7 +71,7 @@ export default function App({ Component, pageProps }) {
       <ModalProvider>
         <Layout>
           <Component {...pageProps} />
-          <Toaster richColors position="top-right" />
+          <Toaster richColors position="top-right" duration={2000} closeButton />
         </Layout>
       </ModalProvider>
     </main>

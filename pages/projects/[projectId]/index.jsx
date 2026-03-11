@@ -443,7 +443,7 @@ function Tab({ icon, name, value, onClick }) {
   return (
     <button
       onClick={() => onClick(name)}
-      className="flex items-center whitespace-nowrap gap-2.5 px-4 py-2 rounded-lg bg-zinc-600/10 text-zinc-600 text-base font-medium tracking-tight cursor-pointer disabled:cursor-default disabled:bg-orange-500/10 disabled:text-primary"
+      className="flex items-center whitespace-nowrap gap-2.5 px-4 py-2 rounded-lg bg-zinc-600/10 text-zinc-600 text-base font-medium tracking-tight cursor-pointer disabled:cursor-default disabled:bg-primary/10 disabled:text-primary"
       disabled={value === name}
     >
       {icon} <p>{name}</p>

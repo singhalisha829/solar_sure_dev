@@ -23,7 +23,7 @@ const ProjectCatagorySidebar = ({
       {selectedTab === "Engineering" && showMDL && (
         <>
           <button
-            className="flex px-2.5 text-zinc-800 text-sm font-bold tracking-tight disabled:border-l-2 border-orange-400"
+            className="flex px-2.5 text-zinc-800 text-sm font-bold tracking-tight disabled:border-l-2 border-secondary"
             disabled={selectedCatagory === "MDL"}
             onClick={() => onClick("MDL")}
           >
@@ -35,7 +35,7 @@ const ProjectCatagorySidebar = ({
 
       {catagories.map((catagory, index) => (
         <button
-          className="flex px-2.5 text-zinc-800 text-sm font-bold tracking-tight disabled:border-l-2 border-orange-400"
+          className="flex px-2.5 text-zinc-800 text-sm font-bold tracking-tight disabled:border-l-2 border-secondary"
           disabled={selectedCatagory === catagory}
           onClick={() => onClick(catagory)}
           key={index}

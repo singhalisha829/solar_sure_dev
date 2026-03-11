@@ -43,7 +43,7 @@ const Button = ({
     case "inverted":
       background = `${disabled
         ? "bg-zinc-800/10 hover:bg-zinc-800/10 cursor-not-allowed"
-        : "bg-[#fef0e8] transition-colors duration-500 hover:bg-primary-light-10"
+        : "bg-primary/10 transition-colors duration-500 hover:bg-primary-light-10"
         }`;
       break;
     case "gray":
